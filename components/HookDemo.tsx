@@ -76,7 +76,7 @@ const UseHoverDemo = () => {
                 ref={hoverRef}
                 className={`p-6 rounded-lg transition-all duration-300 cursor-pointer text-center ${
                     isHovered
-                        ? 'bg-gradient-to-r from-blue-400 to-purple-500 text-white transform scale-105 shadow-lg'
+                        ? 'bg-linear-to-r from-blue-400 to-purple-500 text-white transform scale-105 shadow-lg'
                         : 'bg-gray-100 text-gray-700 hover:shadow-md'
                 }`}
             >

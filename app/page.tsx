@@ -6,12 +6,12 @@ import { ArrowRight, Code, Zap, Shield, Download, Github, ExternalLink } from 'l
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-linear-to-b from-slate-50 to-white">
       {/* Header */}
-      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b bg-white/80 backdrop-blur-xs sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-linear-to-br from-purple-500 to-blue-600 rounded-lg flex items-center justify-center">
               <Code className="w-5 h-5 text-white" />
             </div>
             <div>
@@ -39,7 +39,7 @@ export default function Home() {
           <Badge variant="secondary" className="mb-4">
             v1.0.0 • TypeScript Ready
           </Badge>
-          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-purple-900 to-blue-900 bg-clip-text text-transparent">
+          <h1 className="text-5xl font-bold mb-6 bg-linear-to-r from-gray-900 via-purple-900 to-blue-900 bg-clip-text text-transparent">
             Modern React Hooks Library
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -52,7 +52,7 @@ export default function Home() {
               npm install @zenuilabs/react-hooks
             </div>
             <Link href="/hooks">
-              <Button size="lg" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+              <Button size="lg" className="bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
                 Explore Hooks
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
@@ -179,7 +179,7 @@ export default function Home() {
       <footer className="border-t py-12 px-4">
         <div className="container mx-auto text-center">
           <div className="flex items-center justify-center space-x-3 mb-4">
-            <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-blue-600 rounded-md flex items-center justify-center">
+            <div className="w-6 h-6 bg-linear-to-br from-purple-500 to-blue-600 rounded-md flex items-center justify-center">
               <Code className="w-4 h-4 text-white" />
             </div>
             <span className="font-semibold">ZenUI Labs</span>

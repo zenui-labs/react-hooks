@@ -72,9 +72,9 @@ const categories = Array.from(new Set(hooks.map(hook => hook.category)));
 
 export default function HooksPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-linear-to-b from-slate-50 to-white">
       {/* Header */}
-      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b bg-white/80 backdrop-blur-xs sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <Link href="/">
@@ -84,7 +84,7 @@ export default function HooksPage() {
               </Button>
             </Link>
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-linear-to-br from-purple-500 to-blue-600 rounded-lg flex items-center justify-center">
                 <Code className="w-5 h-5 text-white" />
               </div>
               <div>
@@ -145,7 +145,7 @@ function MyComponent() {
           {categories.map(category => (
             <div key={category}>
               <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-                <div className="w-2 h-6 bg-gradient-to-b from-purple-500 to-blue-600 rounded-full"></div>
+                <div className="w-2 h-6 bg-linear-to-b from-purple-500 to-blue-600 rounded-full"></div>
                 {category}
               </h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -166,7 +166,7 @@ function MyComponent() {
                     </CardHeader>
                     <CardContent>
                       <Link href={`/hooks/${hook.slug}`}>
-                        <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+                        <Button className="w-full bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
                           View Details & Examples
                           <ExternalLink className="w-4 h-4 ml-2" />
                         </Button>

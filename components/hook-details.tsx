@@ -101,9 +101,9 @@ root.render(<App />);`
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+        <div className="min-h-screen bg-linear-to-b from-slate-50 to-white">
             {/* Header */}
-            <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+            <header className="border-b bg-white/80 backdrop-blur-xs sticky top-0 z-50">
                 <div className="container mx-auto px-4 py-4 flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                         <Link href="/hooks">
@@ -113,7 +113,7 @@ root.render(<App />);`
                             </Button>
                         </Link>
                         <div className="flex items-center space-x-3">
-                            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg flex items-center justify-center">
+                            <div className="w-8 h-8 bg-linear-to-br from-purple-500 to-blue-600 rounded-lg flex items-center justify-center">
                                 <Code className="w-5 h-5 text-white" />
                             </div>
                             <div>
@@ -132,7 +132,7 @@ root.render(<App />);`
                         <Button
                             size="sm"
                             onClick={createStackBlitzProject}
-                            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                            className="bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
                         >
                             <Play className="w-4 h-4 mr-2" />
                             Try Online
@@ -169,7 +169,7 @@ root.render(<App />);`
                                 </CardDescription>
                             </CardHeader>
                             <CardContent>
-                                <div className="border rounded-lg p-6 bg-gradient-to-br from-gray-50 to-white">
+                                <div className="border rounded-lg p-6 bg-linear-to-br from-gray-50 to-white">
                                     <HookRenderer hookName={slug} />
                                 </div>
                             </CardContent>
@@ -293,7 +293,7 @@ root.render(<App />);`
                 <div className="flex gap-4 mt-8">
                     <Button
                         onClick={createStackBlitzProject}
-                        className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                        className="bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
                     >
                         <Play className="w-4 h-4 mr-2" />
                         Open in StackBlitz
