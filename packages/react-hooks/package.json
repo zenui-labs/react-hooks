@@ -1,7 +1,7 @@
 {
   "name": "@zenuilabs/react-hooks",
   "version": "0.0.1",
-  "description": "A collection of reusable React hooks for modern applications",
+  "description": "Reusable, TypeScript-ready React hooks to supercharge your UI. Lightweight, fully typed, and built for seamless integration.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -26,10 +26,16 @@
     "hooks",
     "typescript",
     "utilities",
-    "zenui-labs"
+    "zenui-labs",
+    "react-hooks",
+    "reusable-hook"
   ],
   "author": "ZenUI Labs",
   "license": "MIT",
+  "repository": {
+    "url": "https://github.com/zenui-labs/react-hooks"
+  },
+  "homepage": "https://react-hooks.zenui.net/",
   "peerDependencies": {
     "react": ">=16.8.0"
   },
