@@ -1,6 +1,6 @@
 {
   "name": "@zenuilabs/react-hooks",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Reusable, TypeScript-ready React hooks to supercharge your UI. Lightweight, fully typed, and built for seamless integration.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

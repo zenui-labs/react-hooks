@@ -1,3 +1,7 @@
 @import 'tailwindcss';
 
 @custom-variant dark (&:is(.dark *));
+
+@theme {
+    --color-brandColor: #3B03A9;
+}

@@ -1,22 +1,28 @@
 import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import type {Metadata} from 'next';
+import {Inter, Space_Grotesk} from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({subsets: ['latin']});
+const spaceGrotesk = Space_Grotesk({subsets: ['vietnamese']});
 
 export const metadata: Metadata = {
-  title: 'ZenUI Labs React Hooks - Modern React Hooks Library',
-  description: 'A collection of reusable React hooks for modern web development. TypeScript support, production-ready, and developer-friendly.',
+    title: 'ZenUI Labs React Hooks - Modern React Hooks Library',
+    description:
+        'A collection of reusable React hooks for modern web development. TypeScript support, production-ready, and developer-friendly.',
 };
 
 export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
+                                       children,
+                                   }: {
+    children: React.ReactNode;
 }) {
-  return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
-  );
+    return (
+        <html lang="en">
+        <body className={inter.className}>
+        <div className={spaceGrotesk.className}>
+            {children}
+        </div>
+        </body>
+        </html>
+    );
 }
