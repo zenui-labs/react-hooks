@@ -8,7 +8,7 @@ const Index = ({slug}: { slug: string }) => {
     return (
         <Layout>
             <Details slug={slug}/>
-            <PopularHooks mtValue={16}/>
+            <PopularHooks className='mt-16'/>
         </Layout>
     );
 };

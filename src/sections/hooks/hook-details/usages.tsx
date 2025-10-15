@@ -1,17 +1,39 @@
-import React from 'react';
+'use client'
+
+import React, {useEffect, useState} from 'react';
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";
 import {Check, Copy} from "lucide-react";
 import {HookType} from "@/types";
 import {useCopyToClipboard} from "@zenuilabs/react-hooks";
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import vsDark from 'react-syntax-highlighter/dist/esm/styles/prism/one-dark';
+import vsLight from 'react-syntax-highlighter/dist/esm/styles/prism/vs';
 
 const Usages = ({hook}: { hook: HookType }) => {
+    const [currentTheme, setCurrentTheme] = useState(localStorage.getItem('rh-theme') || 'dark');
+
+    const syntaxTheme = currentTheme === 'dark' ? vsDark : vsLight;
+
+    useEffect(() => {
+        const observer = new MutationObserver(() => {
+            const isDark = document.documentElement.classList.contains('dark');
+            setCurrentTheme(isDark ? 'dark' : 'light');
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class'],
+        });
+
+        return () => observer.disconnect();
+    }, []);
 
     const {isCopied, copyToClipboard} = useCopyToClipboard()
 
     return (
         <>
-            <Card className='border-none bg-gray-50'>
+            <Card className='border-none bg-gray-50 dark:bg-gray-900 dark:text-darkText'>
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         How to Use
@@ -22,14 +44,27 @@ const Usages = ({hook}: { hook: HookType }) => {
                 </CardHeader>
                 <CardContent>
                     <div className="relative">
-                  <pre className="bg-gray-900 text-white p-4 rounded-lg text-sm overflow-x-auto">
-                    <code>{hook.usage}</code>
-                  </pre>
+                        <SyntaxHighlighter
+                            language="javascript"
+                            customStyle={{
+                                margin: 0,
+                                fontSize: '12px !important',
+                                border: 'none',
+                                borderRadius: '0.5rem',
+                                lineHeight: '1.6'
+                            }}
+                            style={syntaxTheme}
+                            showLineNumbers={false}
+                            wrapLines={true}
+                            wrapLongLines={true}
+                        >
+                            {hook.usage}
+                        </SyntaxHighlighter>
                         <Button
                             size="sm"
                             onClick={() => copyToClipboard(hook.usage)}
                             variant="outline"
-                            className="absolute border-slate-600 rounded-lg gap-1 cursor-pointer text-white top-2 right-2"
+                            className="absolute border-gray-200 dark:border-slate-700 rounded-lg gap-1 cursor-pointer dark:text-darkText top-2 right-2"
                         >
                             {
                                 isCopied ? (
@@ -49,20 +84,29 @@ const Usages = ({hook}: { hook: HookType }) => {
                 </CardContent>
             </Card>
 
-            <Card className='border-none bg-gray-50'>
+            <Card className='border-none dark:bg-gray-900 dark:text-darkText bg-gray-50'>
                 <CardHeader>
                     <CardTitle>Installation</CardTitle>
                 </CardHeader>
                 <CardContent className='relative'>
-                    <div className="bg-gray-900 text-white p-3 rounded-lg font-mono text-sm">
+                    <SyntaxHighlighter
+                        language="bash"
+                        customStyle={{
+                            margin: 0,
+                            fontSize: '14px !important',
+                            border: 'none',
+                            borderRadius: '0.5rem',
+                        }}
+                        style={syntaxTheme}
+                    >
                         npm install @zenuilabs/react-hooks
-                    </div>
+                    </SyntaxHighlighter>
 
                     <Button
                         size="sm"
                         onClick={() => copyToClipboard('npm install @zenuilabs/react-hooks')}
                         variant="outline"
-                        className="absolute border-slate-600 rounded-lg gap-1 cursor-pointer text-white top-1 right-7"
+                        className="absolute border-gray-200 dark:border-slate-700 rounded-lg gap-1 cursor-pointer dark:text-darkText top-2 right-7"
                     >
                         {
                             isCopied ? (

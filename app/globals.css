@@ -4,4 +4,14 @@
 
 @theme {
     --color-brandColor: #3B03A9;
+    --color-darkBg: #00001A;
+    --color-darkText: #f4f4f4;
+}
+
+* {
+    scroll-behavior: smooth;
+}
+
+button {
+    cursor: pointer;
 }

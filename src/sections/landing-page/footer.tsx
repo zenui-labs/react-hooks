@@ -14,7 +14,7 @@ const Footer = () => {
             ></div>
 
             <p
-                className="text-[0.8rem] opacity-80 text-center text-gray-600 dark:text-gray-400"
+                className="text-[0.8rem] opacity-80 text-center text-gray-600 dark:text-gray-300"
             >
                 A product of
                 <a

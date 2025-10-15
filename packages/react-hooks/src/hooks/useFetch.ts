@@ -1,7 +1,7 @@
-import {useEffect, useState} from 'react';
-import type {FetchState} from '../types';
+import { useEffect, useState } from 'react';
+import type { FetchState } from '../types';
 
-export function useFetch<T>(url: string): FetchState<T> {
+export function useFetch<T>(url: string, options?: RequestInit): FetchState<T> {
     const [data, setData] = useState<T | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -11,7 +11,8 @@ export function useFetch<T>(url: string): FetchState<T> {
             try {
                 setLoading(true);
                 setError(null);
-                const response = await fetch(url);
+
+                const response = await fetch(url, options);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -25,7 +26,7 @@ export function useFetch<T>(url: string): FetchState<T> {
         };
 
         fetchData();
-    }, [url]);
+    }, [url, JSON.stringify(options)]);
 
-    return {data, loading, error};
+    return { data, loading, error };
 }

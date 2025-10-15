@@ -7,6 +7,7 @@ export interface HookType {
         key: string
         type: string
         description: string
+        param?: string
     }[]
     returns: {
         name: string
