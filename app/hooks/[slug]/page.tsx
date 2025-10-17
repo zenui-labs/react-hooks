@@ -1,6 +1,10 @@
 import {hooksData} from "@/data";
-import HookDetails from "@/sections/hooks/hook-details";
 import {Metadata} from "next";
+import dynamic from "next/dynamic";
+
+const HookDetails = dynamic(() => import('@/sections/hooks/hook-details'), {
+    ssr: false,
+});
 
 export async function generateStaticParams() {
     return Object.keys(hooksData).map((slug) => ({slug}));
