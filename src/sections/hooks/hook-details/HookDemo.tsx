@@ -15,6 +15,29 @@ import UseWindowsizeExample from "@/components/hook-examples/use-windowsize-exam
 import UseKeypressExample from "@/components/hook-examples/use-keypress-example";
 import UseLongpressExample from "@/components/hook-examples/use-longpress-example";
 import UseScrollExample from "@/components/hook-examples/use-scroll-example";
+import UseDropExample from "@/components/hook-examples/use-drop-example";
+import UseDropareaExample from "@/components/hook-examples/use-droparea-example";
+import UseEventExample from "@/components/hook-examples/use-event-example";
+import UseCopyToClipboardExample from "@/components/hook-examples/use-copytoclipboard-example";
+import UseIntervalExample from "@/components/hook-examples/use-interval-example";
+import UseCookieExample from "@/components/hook-examples/use-cookie-example";
+import UseGeolocationExample from "@/components/hook-examples/use-geolocation-example";
+import UseHashExample from "@/components/hook-examples/use-hash-example";
+import UseIdleExample from "@/components/hook-examples/use-idle-example";
+import UseIntersectionExample from "@/components/hook-examples/use-intersection-example";
+import UseLocationExample from "@/components/hook-examples/use-location-example";
+import UseLockBodyScrollExample from "@/components/hook-examples/use-lockbodyscroll-example";
+import UseMediaExample from "@/components/hook-examples/use-media-example";
+import UseMediaDevicesExample from "@/components/hook-examples/use-mediadevices-example";
+import UseMouseExample from "@/components/hook-examples/use-mouse-example";
+import UseMouseWheelExample from "@/components/hook-examples/use-mousewheel-example";
+import UseNetworkStateExample from "@/components/hook-examples/use-networkstate-example";
+import UsePageLeaveExample from "@/components/hook-examples/use-pageleave-example";
+import UseSearchparamExample from "@/components/hook-examples/use-searchparam-example";
+import UseVisibilityChangeExample from "@/components/hook-examples/use-visibilitychange-example";
+import UseVideoExample from "@/components/hook-examples/use-video-example";
+import UseAudioExample from "@/components/hook-examples/use-audio-example";
+import UseFullscreenExample from "@/components/hook-examples/use-fullscreen-example";
 
 const hookComponents: Record<string, React.FC> = {
     usetoggle: UseToggleExample,
@@ -32,7 +55,30 @@ const hookComponents: Record<string, React.FC> = {
     usewindowsize: UseWindowsizeExample,
     usekeypress: UseKeypressExample,
     uselongpress: UseLongpressExample,
-    usescroll: UseScrollExample
+    usescroll: UseScrollExample,
+    usedrop: UseDropExample,
+    usedroparea: UseDropareaExample,
+    useevent: UseEventExample,
+    usecopytoclipboard: UseCopyToClipboardExample,
+    useinterval: UseIntervalExample,
+    usecookie: UseCookieExample,
+    usegeolocation: UseGeolocationExample,
+    usehash: UseHashExample,
+    useidle: UseIdleExample,
+    useintersection: UseIntersectionExample,
+    uselocation: UseLocationExample,
+    uselockbodyscroll: UseLockBodyScrollExample,
+    usemedia: UseMediaExample,
+    usemediadevices: UseMediaDevicesExample,
+    usemouse: UseMouseExample,
+    usemousewheel: UseMouseWheelExample,
+    usenetworkstate: UseNetworkStateExample,
+    usepageleave: UsePageLeaveExample,
+    usesearchparam: UseSearchparamExample,
+    usevisibilitychange: UseVisibilityChangeExample,
+    usevideo: UseVideoExample,
+    useaudio: UseAudioExample,
+    usefullscreen: UseFullscreenExample,
 };
 
 interface HookRendererProps {

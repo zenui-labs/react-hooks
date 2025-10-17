@@ -38,6 +38,7 @@
     "@radix-ui/react-toggle": "^1.1.0",
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.2",
+    "@stackblitz/sdk": "^1.11.0",
     "@tailwindcss/postcss": "^4.1.13",
     "@types/node": "20.6.2",
     "@types/react": "18.2.22",

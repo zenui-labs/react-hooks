@@ -25,14 +25,14 @@ const Hero = () => {
 
             <div className="container mx-auto text-center">
                 <ShimmerButton/>
-                <h1 className="text-[4rem] font-bold dark:text-darkText">
+                <h1 className="text-[2.8rem] leading-tight lg:text-[4rem] font-bold dark:text-darkText">
                     Modern React Hooks Library
                 </h1>
-                <p className="text-lg dark:text-darkText/80 font-normal max-w-4xl mx-auto">
+                <p className="text-base lg:text-lg dark:text-darkText/80 font-normal max-w-4xl mx-auto">
                     A collection of production-ready React hooks that supercharge your development workflow.
                     TypeScript support, zero dependencies, and developer-friendly documentation.
                 </p>
-                <div className="flex flex-col mt-16 sm:flex-row gap-4 justify-center items-center">
+                <div className="flex flex-col mt-10 lg:mt-16 sm:flex-row gap-4 justify-center items-center">
                     <a target={'_blank'} href="https://www.npmjs.com/package/@zenuilabs/react-hooks"
                        className="bg-linear-to-r px-8 py-3.5 rounded-xl text-[1rem] font-medium flex items-center gap-2 text-white bg-brandColor hover:bg-brandColor/80 transition-all duration-200">
                         <Package size={20}/>

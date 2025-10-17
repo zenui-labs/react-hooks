@@ -5,16 +5,22 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/compo
 import {Badge} from "@/components/ui/badge";
 import Link from "next/link";
 import {ArrowRight, ExternalLink} from "lucide-react";
-import {hooks} from "@/data/hooks-data";
+import {hooksData} from "@/data";
 
 const PopularHooks = ({className = 'mt-30'}: { className?: string }) => {
 
-    const items = hooks.filter(item => item.mostUse)
+    const hooksArray = Object.entries(hooksData).map(([key, hook]) => ({
+        id: key,
+        ...hook
+    }));
+
+    const items = hooksArray.filter(item => item.mostUse)
 
     return (
         <section id={'popular-hooks'} className={`${className} mb-16 relative px-4 lg:px-0 mx-auto max-w-[1300px]`}>
             <div className="text-center mb-12">
-                <h2 className="text-[2.5rem] dark:text-darkText font-bold text-center">Most Useful Hooks</h2>
+                <h2 className="text-[1.8rem] leading-tight lg:text-[2.5rem] dark:text-darkText font-bold text-center">Most
+                    Useful Hooks</h2>
                 <p className="text-base dark:text-darkText/80 max-w-2xl mx-auto">
                     Explore some of our most popular hooks that developers love using in their React applications.
                 </p>

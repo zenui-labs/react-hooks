@@ -23,7 +23,7 @@ export default function ShimmerButton() {
                 <span
                     className="relative z-10 inline-flex items-center justify-center w-full h-full px-6 py-1.5 640px:py-2 dark:text-white dark:bg-gray-900 bg-white text-[0.8rem] 640px:text-[0.9rem] rounded-full">
 
-v1.0.0 TypeScript Ready
+v2.0.0 TypeScript Ready
         </span>
             </a>
         </div>

@@ -3,6 +3,7 @@ export const hooksData: Record<string, any> = {
         name: 'useLocalStorage',
         description: 'Persist state in localStorage with automatic JSON serialization and synchronization',
         category: 'State Management',
+        mostUse: true,
         usage: `import { useLocalStorage } from '@zenuilabs/react-hooks';
 
 function MyComponent() {
@@ -36,6 +37,7 @@ function MyComponent() {
         name: 'useSessionStorage',
         description: 'Persist state in localStorage with automatic JSON serialization and synchronization',
         category: 'State Management',
+        mostUse: true,
         usage: `import React, {useEffect} from "react";
 import {useSessionStorage} from "@zenuilabs/react-hooks";
 
@@ -90,7 +92,8 @@ export default UseSessionStorageExample;`,
     usedebounce: {
         name: 'useDebounce',
         description: 'Delay updating a value until a specified time has passed since the last change. Useful for optimizing performance in search inputs, filters, or resize events.',
-        category: 'Performance & Effects',
+        category: 'Performance',
+        mostUse: true,
         usage: `import React, { useState, useEffect } from "react";
 import { useDebounce } from "@zenuilabs/react-hooks";
 
@@ -163,6 +166,7 @@ export default UseDebounceExample;`,
         name: 'useToggle',
         description: 'Manage boolean state with convenient helper functions for common operations',
         category: 'State Management',
+        mostUse: true,
         usage: `
 import {useToggle} from "@zenuilabs/react-hooks";
 import {Moon, Sun} from "lucide-react"; // icons are optional, we used lucide icons
@@ -220,6 +224,7 @@ export default UseToggleExample;`,
         name: 'useCounter',
         description: 'Counter state with increment, decrement, reset, and set operations',
         category: 'State Management',
+        mostUse: true,
         usage: `
 import {useCounter} from "@zenuilabs/react-hooks";
 import {Minus, Plus} from "lucide-react"; // icons are optional, we used lucide icons
@@ -377,7 +382,8 @@ export default UseUpdateExample;`,
     usethrottle: {
         name: 'useThrottle',
         description: 'Limit how frequently a value updates by enforcing a fixed time interval. Useful for optimizing performance in scroll, resize, or rapid input events.',
-        category: 'Performance & Effects',
+        category: 'Performance',
+        mostUse: true,
         usage: `import React, { useState, useEffect } from "react";
 import { useThrottle } from "@zenuilabs/react-hooks";
 
@@ -438,6 +444,7 @@ export default UseThrottleExample;`,
         name: 'useFetch',
         description: 'A powerful data-fetching hook that manages loading, error, and response states automatically.',
         category: 'Data Fetching',
+        mostUse: true,
         usage: `import React from "react";
 import { useFetch } from "@zenuilabs/react-hooks";
 
@@ -488,7 +495,7 @@ export default UseFetchExample;`,
     useasync: {
         name: 'useAsync',
         description: 'Manage the lifecycle of asynchronous operations (loading, success, error) with built-in state management. Ideal for handling promises, API calls, or any async task.',
-        category: 'Async Utilities',
+        category: 'Data Fetching',
         usage: `import React, { useEffect } from "react";
 import { useAsync } from "@zenuilabs/react-hooks";
 
@@ -590,7 +597,7 @@ export default UseAsyncExample;`,
     usehover: {
         name: 'useHover',
         description: 'Detect whether an element is being hovered by the mouse and track its hover state.',
-        category: 'UI & Interaction',
+        category: 'DOM & Events',
         usage: `import {useHover} from "@zenuilabs/react-hooks";
 
 const UseHoverExample = () => {
@@ -642,7 +649,8 @@ export default UseHoverExample;
     useclickoutside: {
         name: 'useClickOutside',
         description: 'Detect clicks or touches outside a referenced element and trigger a handler function. Useful for closing dropdowns, modals, or tooltips when clicking outside.',
-        category: 'UI & Interaction',
+        category: 'DOM & Events',
+        mostUse: true,
         usage: `import React, {useRef, useState} from "react";
 import {useClickOutside} from "@zenuilabs/react-hooks";
 
@@ -698,7 +706,8 @@ export default ClickOutsideDropdown;`,
     usewindowsize: {
         name: 'useWindowSize',
         description: 'Track the current width and height of the browser window. Automatically updates when the window is resized.',
-        category: 'UI & Utilities',
+        category: 'DOM & Events',
+        mostUse: true,
         usage: `import React from "react";
 import {useWindowSize} from "@zenuilabs/react-hooks";
 
@@ -730,7 +739,7 @@ export default WindowSizeCard;`,
     usekeypress: {
         name: 'useKeyPress',
         description: 'Track whether a specific key is currently being pressed on the keyboard.',
-        category: 'UI & Interaction',
+        category: 'DOM & Events',
         usage: `import React from "react";
 import {useKeyPress} from "@zenuilabs/react-hooks";
 
@@ -774,7 +783,7 @@ export default KeyPressCard;`,
     uselongpress: {
         name: 'useLongPress',
         description: 'Detect long press gestures on mouse or touch devices and trigger a callback after a specified delay.',
-        category: 'UI & Interaction',
+        category: 'DOM & Events',
         usage: `import React, {useState} from "react";
 import {useLongPress} from "@zenuilabs/react-hooks";
 
@@ -829,7 +838,7 @@ export default LongPressCard;`,
     usescroll: {
         name: 'useScroll',
         description: 'Track the scroll position (x, y) and scroll direction of an element or the window.',
-        category: 'UI & Utilities',
+        category: 'DOM & Events',
         usage: `import React, {useRef} from "react";
 import {useScroll} from "@zenuilabs/react-hooks";
 
@@ -876,5 +885,1446 @@ export default UseScrollExample;`,
             }
         ]
     },
+    usedrop: {
+        name: 'useDrop',
+        description: 'Handle drag-and-drop interactions on an element, including detecting when an item is dragged over and dropped. Supports text or custom data transfers.',
+        category: 'DOM & Events',
+        usage: `import {useDrop} from "@zenuilabs/react-hooks";
 
+export default function UseDropExample() {
+    const {ref, isOver, data, handlers} = useDrop<HTMLDivElement>();
+
+    const displayData = () => {
+        if (!data) return 'None';
+
+        if (typeof data === 'string') {
+            return data;
+        }
+
+        if (data instanceof FileList) {
+            return Array.from(data)
+                .map((file) => file.name)
+                .join(', ');
+        }
+
+        return 'Unknown data type';
+    };
+
+    const handleDragStart = (e: React.DragEvent, text: string) => {
+        e.dataTransfer.setData('text/plain', text);
+    };
+
+    return (
+        <div className="flex justify-center dark:text-darkText flex-col rounded-xl p-16 bg-gray-100 dark:bg-gray-900">
+            <div className="w-full max-w-2xl space-y-6">
+                {/* Status Display */}
+                <div className="rounded-xl p-6 shadow-lg bg-white dark:bg-gray-800">
+                    <div className="space-y-2">
+                        <p className="text-gray-700 dark:text-gray-300">
+                            Drag State:{' '}
+                            <strong
+                                className={isOver ? 'text-brandColor dark:text-purple-400' : 'text-gray-900 dark:text-white'}>
+                                {isOver ? 'Dragging Over' : 'Idle'}
+                            </strong>
+                        </p>
+                        <p className="text-gray-700 dark:text-gray-300">
+                            Dropped Data:{' '}
+                            <strong className="text-gray-900 dark:text-white break-all">
+                                {displayData()}
+                            </strong>
+                        </p>
+                    </div>
+                </div>
+
+                {/* Draggable Items */}
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                    Try dragging these:
+                </h2>
+                <div className="flex gap-4">
+                    <div
+                        draggable
+                        onDragStart={(e) => handleDragStart(e, 'Hello from draggable item 1!')}
+                        className="p-4 bg-blue-500 text-white rounded-lg cursor-move hover:bg-blue-600 transition-colors text-center"
+                    >
+                        Drag me! (Item 1)
+                    </div>
+
+                    <div
+                        draggable
+                        onDragStart={(e) => handleDragStart(e, 'This is draggable item 2')}
+                        className="p-4 bg-green-500 text-white rounded-lg cursor-move hover:bg-green-600 transition-colors text-center"
+                    >
+                        Drag me! (Item 2)
+                    </div>
+
+                    <div
+                        draggable 
+                        onDragStart={(e) => handleDragStart(e, 'This is draggable item 3')}
+                        className="p-4 bg-purple-500 text-white rounded-lg cursor-move hover:bg-purple-600 transition-colors text-center"
+                    >
+                        Drag me! (Item 3)
+                    </div>
+                </div>
+
+                {/* Drop Zone */}
+                <div
+                    ref={ref}
+                    {...handlers}
+                    className={\`h-64 flex items-center justify-center rounded-lg border-2 border-dashed transition-all duration-300 \${isOver
+                ? 'border-blue-500 bg-blue-100 dark:bg-blue-900/40'
+                : 'border-gray-200 dark:border-gray-400 dark:border-gray-600 bg-white dark:bg-gray-800'
+        }\`}
+                >
+                    <p className="text-gray-600 dark:text-gray-300 text-lg font-medium">
+                        Drop Zone
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+}`,
+        api: [
+            {
+                param: 'T',
+                type: 'HTMLElement',
+                description: 'Generic type for the element being used as the drop target.'
+            }
+        ],
+        returns: [
+            {name: 'ref', type: 'RefObject<HTMLElement>', description: 'A ref to attach to the drop target element.'},
+            {
+                name: 'isOver',
+                type: 'boolean',
+                description: 'Whether an item is currently being dragged over the target.'
+            },
+            {name: 'data', type: 'any | null', description: 'The dropped data, if any (via DataTransfer API).'},
+            {
+                name: 'handlers',
+                type: 'DropHandlers',
+                description: 'Object containing `onDragOver`, `onDragLeave`, and `onDrop` event handlers to spread on your target element.'
+            }
+        ]
+    },
+    usedroparea: {
+        name: 'useDropArea',
+        description: 'Handle file drag-and-drop interactions within a specific area. Provides real-time feedback when files are dragged over and captures the dropped file list.',
+        category: 'DOM & Events',
+        usage: `import React from "react";
+import {useDropArea} from "@zenuilabs/react-hooks";
+
+const UseDropAreaExample = () => {
+    const {ref, isOver, files, handlers} = useDropArea<HTMLDivElement>();
+
+    return (
+        <div className="flex flex-col p-16 justify-center bg-gray-100 dark:bg-gray-900 rounded-xl space-y-4">
+            {/* Info Panel */}
+            <div className="rounded-xl p-6 shadow-lg transition-colors bg-gray-50 text-gray-900 dark:bg-gray-800 dark:text-white w-full max-w-md">
+                <p>Status: <strong>{isOver ? "Dragging Files..." : "Idle"}</strong></p>
+                <p>Total Files: <strong>{files.length}</strong></p>
+                {files.length > 0 && (
+                    <ul className="mt-3 list-disc list-inside space-y-1 text-sm">
+                        {files.map((file, i) => (
+                            <li key={i}>
+                                {file.name} <span className="text-gray-500">({(file.size / 1024).toFixed(1)} KB)</span>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+
+            {/* Drop Zone */}
+            <div
+                ref={ref}
+                {...handlers}
+                className={\`h-64 w-full max-w-md flex items-center justify-center rounded-lg border-2 border-dashed transition-all duration-300 cursor-pointer \${isOver ? "border-green-500 bg-green-100 dark:bg-green-900/40" : "border-gray-400 dark:border-gray-600 bg-gray-50 dark:bg-gray-800"}\`}
+            >
+                <p className="text-gray-600 dark:text-gray-300 text-center px-4">
+                    Drag & drop files here or click to select
+                </p>
+            </div>
+        </div>
+    );
+};
+
+export default UseDropAreaExample;`,
+        api: [
+            {
+                param: 'T',
+                type: 'HTMLElement',
+                description: 'Generic type for the element being used as the drop area.'
+            }
+        ],
+        returns: [
+            {
+                name: 'ref',
+                type: 'RefObject<HTMLElement>',
+                description: 'Attach this ref to the element that should act as the file drop zone.'
+            },
+            {name: 'isOver', type: 'boolean', description: 'True while files are being dragged over the drop area.'},
+            {name: 'files', type: 'File[]', description: 'Array of dropped File objects with name, type, and size.'},
+            {
+                name: 'handlers',
+                type: 'DropAreaHandlers',
+                description: 'Object containing `onDragOver`, `onDragLeave`, and `onDrop` event handlers to spread onto the drop area.'
+            }
+        ]
+    },
+    useevent: {
+        name: 'useEvent',
+        description: 'Easily attach and clean up DOM or window event listeners in React. Automatically handles binding to elements, refs, or global targets with proper cleanup.',
+        category: 'DOM & Events',
+        usage: `import React, {useRef, useState} from "react";
+import {useEvent} from "@zenuilabs/react-hooks";
+
+const UseEventExample = () => {
+    const boxRef = useRef<HTMLDivElement>(null);
+    const [windowSize, setWindowSize] = useState({ width: window.innerWidth, height: window.innerHeight });
+    const [boxClicks, setBoxClicks] = useState(0);
+
+    // Listen to window resize events
+    useEvent("resize", () => {
+        setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    });
+
+    // Listen to clicks on a specific element
+    useEvent("click", () => {
+        setBoxClicks((prev) => prev + 1);
+    }, boxRef);
+
+    return (
+        <div className="flex flex-col p-16 justify-center bg-gray-100 dark:bg-gray-900 rounded-xl space-y-4">
+            {/* Info Panel */}
+            <div className="rounded-xl p-6 shadow-lg transition-colors bg-gray-50 text-gray-900 dark:bg-gray-800 dark:text-white w-full max-w-md space-y-2">
+                <p>Window Width: <strong>{windowSize.width}px</strong></p>
+                <p>Window Height: <strong>{windowSize.height}px</strong></p>
+                <p>Box Clicks: <strong>{boxClicks}</strong></p>
+            </div>
+
+            {/* Event Target Element */}
+            <div
+                ref={boxRef}
+                className="h-48 w-full max-w-md flex items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/30 border border-blue-400 dark:border-blue-700 cursor-pointer transition-all hover:scale-[1.02]"
+            >
+                <p className="text-blue-700 dark:text-blue-300 font-medium">
+                    Click Me (tracked with useEvent)
+                </p>
+            </div>
+        </div>
+    );
+};
+
+export default UseEventExample;`,
+        api: [
+            {
+                param: 'type',
+                type: 'keyof WindowEventMap',
+                description: 'The name of the event to listen for (e.g., "resize", "click", "keydown").'
+            },
+            {
+                param: 'listener',
+                type: '(event: WindowEventMap[K]) => void',
+                description: 'Callback function triggered when the event fires.'
+            },
+            {
+                param: 'target',
+                type: 'RefObject<HTMLElement> | HTMLElement | Window | Document',
+                description: 'The target to attach the event listener to. Defaults to window if not provided.'
+            },
+            {
+                param: 'options',
+                type: 'AddEventListenerOptions',
+                description: 'Optional event listener options like `capture`, `once`, or `passive`.'
+            }
+        ],
+        returns: [
+            {
+                name: 'void',
+                type: '—',
+                description: 'This hook doesn’t return anything; it automatically handles listener registration and cleanup.'
+            }
+        ]
+    },
+    usecopytoclipboard: {
+        name: 'useCopyToClipboard',
+        description: 'Copy any text to the user’s clipboard and track the copy state for UI feedback (e.g., showing a “Copied!” message).',
+        category: 'Utilities',
+        usage: `import React, {useState} from "react";
+import {useCopyToClipboard} from "@zenuilabs/react-hooks";
+import {Check, Copy} from "lucide-react";
+
+const UseCopyToClipboardExample = () => {
+    const {isCopied, copyToClipboard} = useCopyToClipboard();
+    const [text, setText] = useState("Hello from ZenUI Hooks! 🚀");
+
+    return (
+        <div className="flex flex-col p-16 justify-center bg-gray-100 dark:bg-gray-900 rounded-xl space-y-4">
+            {/* Info Panel */}
+            <div className="rounded-xl p-6 shadow-lg transition-colors bg-gray-50 text-gray-900 dark:bg-gray-800 dark:text-white w-full max-w-md space-y-3">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Type or modify text below, then click “Copy” to copy it to your clipboard.
+                </p>
+                <textarea
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    className="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white p-3 outline-none focus:ring-2 focus:ring-accent"
+                    rows={3}
+                />
+
+                <button
+                    onClick={() => copyToClipboard(text)}
+                    className="inline-flex items-center justify-center space-x-2 rounded-md bg-accent hover:bg-accent-dark text-white px-4 py-2 transition-all"
+                >
+                    {isCopied ? (
+                        <>
+                            <Check className="w-4 h-4" /> <span>Copied!</span>
+                        </>
+                    ) : (
+                        <>
+                            <Copy className="w-4 h-4" /> <span>Copy Text</span>
+                        </>
+                    )}
+                </button>
+            </div>
+        </div>
+    );
+};
+
+export default UseCopyToClipboardExample;`,
+        api: [
+            {
+                param: 'copyToClipboard',
+                type: '(text: string) => Promise<void>',
+                description: 'Function that copies the provided text to the clipboard.'
+            }
+        ],
+        returns: [
+            {
+                name: 'isCopied',
+                type: 'boolean',
+                description: 'Indicates whether the text was recently copied (resets after 2 seconds).'
+            },
+            {
+                name: 'copyToClipboard',
+                type: '(text: string) => Promise<void>',
+                description: 'Triggers copying text to the clipboard.'
+            }
+        ]
+    },
+    useinterval: {
+        name: 'useInterval',
+        description: 'Run a callback function at a specified time interval, with full React lifecycle support and dynamic delay control.',
+        category: 'Utilities',
+        usage: `import React, {useState} from "react";
+import {useInterval} from "@zenuilabs/react-hooks";
+
+const UseIntervalExample = () => {
+    const [count, setCount] = useState(0);
+    const [isRunning, setIsRunning] = useState(true);
+
+    // 🕒 Increment count every second when running
+    useInterval(() => {
+        setCount((prev) => prev + 1);
+    }, isRunning ? 1000 : null); // Passing null pauses the interval
+
+    return (
+        <div className="flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 rounded-xl space-y-6 w-full max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Interval Counter
+            </h2>
+
+            <div className="text-5xl font-bold text-accent">{count}</div>
+
+            <div className="flex space-x-3">
+                <button
+                    onClick={() => setIsRunning(true)}
+                    disabled={isRunning}
+                    className="px-4 py-2 rounded-md bg-green-500 text-white disabled:bg-gray-400 transition-all"
+                >
+                    Start
+                </button>
+
+                <button
+                    onClick={() => setIsRunning(false)}
+                    disabled={!isRunning}
+                    className="px-4 py-2 rounded-md bg-red-500 text-white disabled:bg-gray-400 transition-all"
+                >
+                    Stop
+                </button>
+
+                <button
+                    onClick={() => setCount(0)}
+                    className="px-4 py-2 rounded-md bg-gray-500 text-white transition-all"
+                >
+                    Reset
+                </button>
+            </div>
+        </div>
+    );
+};
+
+export default UseIntervalExample;`,
+        api: [
+            {
+                param: 'callback',
+                type: '() => void',
+                description: 'The function to be executed at each interval tick.'
+            },
+            {
+                param: 'delay',
+                type: 'number | null',
+                description: 'The delay (in milliseconds) for the interval. Pass `null` to pause execution.'
+            }
+        ],
+        returns: [
+            {
+                name: 'void',
+                type: 'void',
+                description: 'This hook does not return any value; it manages intervals internally.'
+            }
+        ]
+    },
+    usecookie: {
+        name: 'useCookie',
+        description: 'A React hook to easily get, set, and remove cookies with optional configuration for expiration, path, and security settings.',
+        category: 'Utilities',
+        usage: `import React, {useState} from "react";
+import {useCookie} from "@zenuilabs/react-hooks";
+
+const UseCookieExample = () => {
+    const {value: username, setValue: setUsernameCookie, remove: removeUsernameCookie} = useCookie("username", "Guest");
+    const [inputValue, setInputValue] = useState(username);
+
+    const handleSave = () => {
+        setUsernameCookie(inputValue, {
+            path: "/",
+            maxAge: 3600, // 1 hour
+            sameSite: "Lax"
+        });
+    };
+
+    return (
+        <div className="flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 rounded-xl space-y-6 w-full max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Cookie Manager</h2>
+
+            <div className="w-full space-y-3">
+                <input
+                    type="text"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    className="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white p-3 outline-none focus:ring-2 focus:ring-accent"
+                    placeholder="Enter your name"
+                />
+
+                <div className="flex space-x-3">
+                    <button
+                        onClick={handleSave}
+                        className="px-4 py-2 rounded-md bg-accent hover:bg-accent-dark text-white transition-all"
+                    >
+                        Save Cookie
+                    </button>
+
+                    <button
+                        onClick={removeUsernameCookie}
+                        className="px-4 py-2 rounded-md bg-red-500 hover:bg-red-600 text-white transition-all"
+                    >
+                        Remove
+                    </button>
+                </div>
+            </div>
+
+            <p className="text-gray-700 dark:text-gray-300">
+                <span className="font-semibold">Current Cookie:</span> {username || "No cookie set"}
+            </p>
+        </div>
+    );
+};
+
+export default UseCookieExample;`,
+        api: [
+            {
+                param: 'name',
+                type: 'string',
+                description: 'The name of the cookie to read and manage.'
+            },
+            {
+                param: 'initialValue',
+                type: 'string',
+                description: 'Initial fallback value if the cookie is not found.'
+            }
+        ],
+        returns: [
+            {
+                name: 'value',
+                type: 'string',
+                description: 'The current value of the cookie.'
+            },
+            {
+                name: 'setValue',
+                type: '(newValue: string, options?: CookieOptions) => void',
+                description: 'Updates or creates the cookie with optional configuration (e.g., expires, path, maxAge).'
+            },
+            {
+                name: 'remove',
+                type: '() => void',
+                description: 'Removes the cookie by setting its max-age to 0.'
+            }
+        ]
+    },
+    usegeolocation: {
+        name: 'useGeolocation',
+        description: 'Tracks the user’s current geolocation (latitude, longitude, accuracy) and provides any errors if the location cannot be retrieved.',
+        category: 'Browser & Device',
+        usage: `import React from "react";
+import {useGeolocation} from "@zenuilabs/react-hooks";
+
+const UseGeolocationExample = () => {
+    const {latitude, longitude, accuracy, error} = useGeolocation();
+
+    return (
+        <div className="flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 rounded-xl space-y-6 w-full max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Your Current Location
+            </h2>
+
+            {error ? (
+                <p className="text-red-500 dark:text-red-400">{error}</p>
+            ) : (
+                <div className="space-y-2 text-gray-800 dark:text-gray-200">
+                    <p><span className="font-semibold">Latitude:</span> {latitude ?? "Loading..."}</p>
+                    <p><span className="font-semibold">Longitude:</span> {longitude ?? "Loading..."}</p>
+                    <p><span className="font-semibold">Accuracy:</span> {accuracy ? \`\${accuracy} meters\` : "Loading..."}</p>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default UseGeolocationExample;`,
+        api: [],
+        returns: [
+            {
+                name: 'latitude',
+                type: 'number | null',
+                description: 'The current latitude of the user or null if not available.'
+            },
+            {
+                name: 'longitude',
+                type: 'number | null',
+                description: 'The current longitude of the user or null if not available.'
+            },
+            {
+                name: 'accuracy',
+                type: 'number | null',
+                description: 'The accuracy of the geolocation in meters or null if not available.'
+            },
+            {
+                name: 'error',
+                type: 'string | null',
+                description: 'Error message if geolocation could not be retrieved, otherwise null.'
+            }
+        ]
+    },
+    usehash: {
+        name: 'useHash',
+        description: 'Read and update the current URL hash. Automatically tracks changes to the hash and provides a function to update it programmatically.',
+        category: 'Browser & Device',
+        usage: `import React, {useState} from "react";
+import {useHash} from "@zenuilabs/react-hooks";
+
+const UseHashExample = () => {
+    const {hash, setHash} = useHash();
+    const [input, setInput] = useState(hash.replace('#', ''));
+
+    const handleUpdate = () => {
+        setHash(input);
+    };
+
+    return (
+        <div className="flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 rounded-xl space-y-6 w-full max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                URL Hash Manager
+            </h2>
+
+            <p className="text-gray-700 dark:text-gray-300">
+                Current Hash: <span className="font-semibold">{hash || "None"}</span>
+            </p>
+
+            <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                className="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white p-3 outline-none focus:ring-2 focus:ring-accent"
+                placeholder="Enter new hash value"
+            />
+
+            <button
+                onClick={handleUpdate}
+                className="px-4 py-2 rounded-md bg-accent hover:bg-accent-dark text-white transition-all"
+            >
+                Update Hash
+            </button>
+        </div>
+    );
+};
+
+export default UseHashExample;`,
+        api: [],
+        returns: [
+            {
+                name: 'hash',
+                type: 'string',
+                description: 'The current URL hash, including the `#` symbol.'
+            },
+            {
+                name: 'setHash',
+                type: '(newHash: string) => void',
+                description: 'Function to update the URL hash programmatically. Automatically adds `#` if missing.'
+            }
+        ]
+    },
+    useidle: {
+        name: 'useIdle',
+        description: 'Detects when the user is idle based on mouse, keyboard, touch, and scroll events. Returns a boolean indicating whether the user is currently idle.',
+        category: 'Browser & Device',
+        usage: `import React, {useState} from "react";
+import {useIdle} from "@zenuilabs/react-hooks";
+
+const UseIdleExample = () => {
+    const {isIdle} = useIdle(10000); // 10 seconds timeout
+    const [lastActiveTime, setLastActiveTime] = useState(new Date().toLocaleTimeString());
+
+    // Update last active time when user is active
+    React.useEffect(() => {
+        if (!isIdle) {
+            setLastActiveTime(new Date().toLocaleTimeString());
+        }
+    }, [isIdle]);
+
+    return (
+        <div className="flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 rounded-xl space-y-6 w-full max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                User Idle Detection
+            </h2>
+
+            <p className="text-gray-700 dark:text-gray-300">
+                Status: <span className="font-semibold">{isIdle ? "Idle" : "Active"}</span>
+            </p>
+
+            {!isIdle && (
+                <p className="text-gray-600 dark:text-gray-400">
+                    Last Active At: {lastActiveTime}
+                </p>
+            )}
+
+            {isIdle && (
+                <p className="text-red-500 dark:text-red-400">
+                    You have been idle for 10 seconds!
+                </p>
+            )}
+        </div>
+    );
+};
+
+export default UseIdleExample;`,
+        api: [
+            {
+                param: 'timeout',
+                type: 'number',
+                description: 'Optional idle timeout in milliseconds. Default is 60000 (60 seconds).'
+            }
+        ],
+        returns: [
+            {
+                name: 'isIdle',
+                type: 'boolean',
+                description: 'Indicates whether the user is currently idle (true) or active (false).'
+            }
+        ]
+    },
+    useintersection: {
+        name: 'useIntersection',
+        description: 'Tracks whether an element is currently visible in the viewport using the Intersection Observer API.',
+        category: 'Browser & Device',
+        usage: `import React from "react";
+import {useIntersection} from "@zenuilabs/react-hooks";
+
+const UseIntersectionExample = () => {
+    const {ref, isIntersecting} = useIntersection({ threshold: 0.5 });
+
+    return (
+        <div className="flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 rounded-xl space-y-6 w-full max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Intersection Observer Example
+            </h2>
+
+            <p className="text-gray-700 dark:text-gray-300">
+                The box below is {isIntersecting ? "visible" : "not visible"} in the viewport.
+            </p>
+
+            <div className="h-40 w-full overflow-auto border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 p-4">
+                <div style={{height: "600px"}} className="relative">
+                    <div
+                        ref={ref}
+                        className={\`w-full h-32 rounded-md flex items-center justify-center text-white font-bold transition-all \${isIntersecting ? "bg-green-500" : "bg-gray-400"}\`}
+                    >
+                        {isIntersecting ? "Visible" : "Not Visible"}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default UseIntersectionExample;`,
+        api: [
+            {
+                param: 'options',
+                type: 'IntersectionObserverInit',
+                description: 'Optional configuration for the IntersectionObserver, e.g., `root`, `rootMargin`, and `threshold`.'
+            }
+        ],
+        returns: [
+            {
+                name: 'ref',
+                type: 'RefObject<HTMLElement>',
+                description: 'Attach this ref to the element you want to observe.'
+            },
+            {
+                name: 'isIntersecting',
+                type: 'boolean',
+                description: 'Indicates whether the element is currently visible in the viewport based on the observer options.'
+            }
+        ]
+    },
+    uselocation: {
+        name: 'useLocation',
+        description: 'Tracks the current browser location, including pathname, search query, and hash. Updates automatically when the URL changes.',
+        category: 'Browser & Device',
+        usage: `import React from "react";
+import {useLocation} from "@zenuilabs/react-hooks";
+
+const UseLocationExample = () => {
+    const {pathname, search, hash} = useLocation();
+
+    return (
+        <div className="flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 rounded-xl space-y-6 w-full max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Current Location Tracker
+            </h2>
+
+            <div className="space-y-2 text-gray-700 dark:text-gray-300">
+                <p><span className="font-semibold">Pathname:</span> {pathname}</p>
+                <p><span className="font-semibold">Search:</span> {search || "None"}</p>
+                <p><span className="font-semibold">Hash:</span> {hash || "None"}</p>
+            </div>
+        </div>
+    );
+};
+
+export default UseLocationExample;`,
+        api: [],
+        returns: [
+            {
+                name: 'pathname',
+                type: 'string',
+                description: 'The current URL pathname (e.g., "/about").'
+            },
+            {
+                name: 'search',
+                type: 'string',
+                description: 'The current URL query string (e.g., "?id=123").'
+            },
+            {
+                name: 'hash',
+                type: 'string',
+                description: 'The current URL hash (e.g., "#section1").'
+            }
+        ]
+    },
+    uselockbodyscroll: {
+        name: 'useLockBodyScroll',
+        description: 'Locks or unlocks scrolling on the body element. Useful for modals, sidebars, or other overlay components.',
+        category: 'DOM & Events',
+        usage: `import React, {useState} from "react";
+import {useLockBodyScroll} from "@zenuilabs/react-hooks";
+
+const UseLockBodyScrollExample = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Lock body scroll when modal is open
+    useLockBodyScroll(isModalOpen);
+
+    return (
+        <div className="flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 rounded-xl space-y-6 w-full max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Lock Body Scroll Example
+            </h2>
+
+            <button
+                onClick={() => setIsModalOpen(true)}
+                className="px-4 py-2 rounded-md bg-accent hover:bg-accent-dark text-white transition-all"
+            >
+                Open Modal
+            </button>
+
+            {isModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-80 text-center space-y-4">
+                        <p className="text-gray-900 dark:text-white">
+                            Body scroll is locked while this modal is open.
+                        </p>
+                        <button
+                            onClick={() => setIsModalOpen(false)}
+                            className="px-4 py-2 rounded-md bg-red-500 hover:bg-red-600 text-white transition-all"
+                        >
+                            Close Modal
+                        </button>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default UseLockBodyScrollExample;`,
+        api: [
+            {
+                param: 'lock',
+                type: 'boolean',
+                description: 'Optional. Pass `true` to lock body scroll, `false` to unlock. Default is `true`.'
+            }
+        ],
+        returns: []
+    },
+    usemedia: {
+        name: 'useMedia',
+        description: 'Tracks whether a given CSS media query currently matches. Updates in real-time when the viewport changes.',
+        category: 'Browser & Device',
+        usage: `import React from "react";
+import {useMedia} from "@zenuilabs/react-hooks";
+
+const UseMediaExample = () => {
+    const {matches: isMobile} = useMedia("(max-width: 768px)");
+
+    return (
+        <div className="flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 rounded-xl space-y-6 w-full max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Responsive Media Query
+            </h2>
+
+            <p className="text-gray-700 dark:text-gray-300">
+                Current viewport: <span className="font-semibold">{isMobile ? "Mobile" : "Desktop"}</span>
+            </p>
+
+            <div
+                className={\`w-full h-40 rounded-lg flex items-center justify-center font-bold text-white transition-all \${isMobile ? "bg-blue-500" : "bg-green-500"}\`}
+            >
+                {isMobile ? "Mobile Layout" : "Desktop Layout"}
+            </div>
+        </div>
+    );
+};
+
+export default UseMediaExample;`,
+        api: [
+            {
+                param: 'query',
+                type: 'string',
+                description: 'The CSS media query to evaluate (e.g., "(max-width: 768px)").'
+            },
+            {
+                param: 'defaultState',
+                type: 'boolean',
+                description: 'Optional. The initial state before the first evaluation. Defaults to false.'
+            }
+        ],
+        returns: [
+            {
+                name: 'matches',
+                type: 'boolean',
+                description: 'Indicates whether the media query currently matches.'
+            }
+        ]
+    },
+    usemediadevices: {
+        name: 'useMediaDevices',
+        description: 'Fetches the list of available media devices (microphones, cameras, speakers) and updates automatically when devices change.',
+        category: 'Browser & Device',
+        usage: `import React from "react";
+import {useMediaDevices} from "@zenuilabs/react-hooks";
+
+const UseMediaDevicesExample = () => {
+    const {devices} = useMediaDevices();
+
+    return (
+        <div className="flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 rounded-xl space-y-6 w-full max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Media Devices
+            </h2>
+
+            {devices.length === 0 ? (
+                <p className="text-gray-700 dark:text-gray-300">No media devices found.</p>
+            ) : (
+                <ul className="space-y-2 text-gray-800 dark:text-gray-200 w-full">
+                    {devices.map((device) => (
+                        <li key={device.deviceId} className="p-2 border border-gray-300 dark:border-gray-700 rounded-md">
+                            <span className="font-semibold">{device.kind.replace("input", "Input").replace("output", "Output")}:</span> {device.label || "Unknown Device"}
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </div>
+    );
+};
+
+export default UseMediaDevicesExample;`,
+        api: [],
+        returns: [
+            {
+                name: 'devices',
+                type: 'MediaDeviceInfoExtended[]',
+                description: 'An array of media devices available to the browser, including microphones, cameras, and speakers.'
+            }
+        ]
+    },
+    usemouse: {
+        name: 'useMouse',
+        description: 'Tracks the mouse cursor position relative to the window or a specific element. Returns the X and Y coordinates in real-time.',
+        category: 'DOM & Events',
+        usage: `import React, {useRef} from "react";
+import {useMouse} from "@zenuilabs/react-hooks";
+
+const UseMouseExample = () => {
+    const boxRef = useRef<HTMLDivElement>(null);
+    const {x, y} = useMouse(boxRef);
+
+    return (
+        <div className="flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 rounded-xl space-y-6 w-full max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Mouse Position Tracker
+            </h2>
+
+            <div
+                ref={boxRef}
+                className="w-full h-64 bg-gray-200 dark:bg-gray-800 rounded-lg relative overflow-hidden flex items-center justify-center"
+            >
+                <div
+                    className="absolute w-6 h-6 bg-accent rounded-full pointer-events-none transform -translate-x-1/2 -translate-y-1/2"
+                    style={{ left: x, top: y }}
+                ></div>
+                <p className="text-gray-900 dark:text-white font-medium z-10">
+                    X: {x}px, Y: {y}px
+                </p>
+            </div>
+
+            <p className="text-gray-700 dark:text-gray-300">
+                Move your mouse inside the box to track coordinates relative to it.
+            </p>
+        </div>
+    );
+};
+
+export default UseMouseExample;`,
+        api: [
+            {
+                param: 'ref',
+                type: 'RefObject<HTMLElement> | undefined',
+                description: 'Optional. If provided, mouse coordinates are relative to this element. Otherwise, they are relative to the window.'
+            }
+        ],
+        returns: [
+            {
+                name: 'x',
+                type: 'number',
+                description: 'The current X position of the mouse relative to the element or window.'
+            },
+            {
+                name: 'y',
+                type: 'number',
+                description: 'The current Y position of the mouse relative to the element or window.'
+            }
+        ]
+    },
+    usemousewheel: {
+        name: 'useMouseWheel',
+        description: 'Tracks mouse wheel events and returns the scroll deltas (deltaX, deltaY, deltaZ) in real-time. Can be attached to the window or a specific element.',
+        category: 'DOM & Events',
+        usage: `import React, {useRef} from "react";
+import {useMouseWheel} from "@zenuilabs/react-hooks";
+
+const UseMouseWheelExample = () => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const {deltaX, deltaY, deltaZ} = useMouseWheel(containerRef);
+
+    return (
+        <div className="flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 rounded-xl space-y-6 w-full max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Mouse Wheel Tracker
+            </h2>
+
+            <div
+                ref={containerRef}
+                className="h-64 w-full max-w-md overflow-auto rounded-lg bg-gray-50 dark:bg-gray-800 p-4 border border-gray-300 dark:border-gray-700"
+            >
+                <div style={{height: '1200px', width: '100%'}} className="bg-gradient-to-b from-blue-200 to-blue-500 dark:from-blue-700 dark:to-blue-900"></div>
+            </div>
+
+            <p className="text-gray-700 dark:text-gray-300">
+                deltaX: <span className="font-semibold">{deltaX}</span> px
+            </p>
+            <p className="text-gray-700 dark:text-gray-300">
+                deltaY: <span className="font-semibold">{deltaY}</span> px
+            </p>
+            <p className="text-gray-700 dark:text-gray-300">
+                deltaZ: <span className="font-semibold">{deltaZ}</span> px
+            </p>
+        </div>
+    );
+};
+
+export default UseMouseWheelExample;`,
+        api: [
+            {
+                param: 'ref',
+                type: 'RefObject<HTMLElement> | undefined',
+                description: 'Optional. If provided, wheel events are tracked relative to this element. Otherwise, they are tracked on the window.'
+            }
+        ],
+        returns: [
+            {
+                name: 'deltaX',
+                type: 'number',
+                description: 'The horizontal scroll amount of the mouse wheel event in pixels.'
+            },
+            {
+                name: 'deltaY',
+                type: 'number',
+                description: 'The vertical scroll amount of the mouse wheel event in pixels.'
+            },
+            {
+                name: 'deltaZ',
+                type: 'number',
+                description: 'The Z-axis scroll amount of the mouse wheel event (rarely used).'
+            }
+        ]
+    },
+    usenetworkstate: {
+        name: 'useNetworkState',
+        description: 'Tracks the browser network state in real-time. Returns whether the user is online and the timestamp since the last change.',
+        category: 'Browser & Device',
+        usage: `import React from "react";
+import {useNetworkState} from "@zenuilabs/react-hooks";
+
+const UseNetworkStateExample = () => {
+    const {online, since} = useNetworkState();
+
+    return (
+        <div className="flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 rounded-xl space-y-6 w-full max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Network Status Tracker
+            </h2>
+
+            <p className={\`text-lg font-medium \${online ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}\`}>
+                {online ? "Online" : "Offline"}
+            </p>
+
+            <p className="text-gray-700 dark:text-gray-300">
+                {since ? \`Status changed at: \${since.toLocaleTimeString()}\` : "Initializing..."}
+            </p>
+        </div>
+    );
+};
+
+export default UseNetworkStateExample;`,
+        api: [],
+        returns: [
+            {
+                name: 'online',
+                type: 'boolean',
+                description: 'Indicates whether the browser is currently online.'
+            },
+            {
+                name: 'since',
+                type: 'Date | undefined',
+                description: 'The timestamp when the network state last changed.'
+            }
+        ]
+    },
+    usepageleave: {
+        name: 'usePageLeave',
+        description: 'Detects when the user attempts to leave the page (e.g., closing the tab or refreshing) and triggers a callback. Can be used to show a confirmation dialog or save state.',
+        category: 'Browser & Device',
+        usage: `import React, {useState} from "react";
+import {usePageLeave} from "@zenuilabs/react-hooks";
+
+const UsePageLeaveExample = () => {
+    const [message, setMessage] = useState("Try refreshing or closing the page!");
+
+    usePageLeave((event) => {
+        // Optional: Custom logic before leaving
+        console.log("Page leave detected!");
+        setMessage("You attempted to leave the page!");
+        // Default browser confirmation
+        event && (event.returnValue = "Are you sure you want to leave?");
+    });
+
+    return (
+        <div className="flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 rounded-xl space-y-6 w-full max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Page Leave Detection
+            </h2>
+
+            <p className="text-gray-700 dark:text-gray-300">{message}</p>
+        </div>
+    );
+};
+
+export default UsePageLeaveExample;`,
+        api: [
+            {
+                param: 'callback',
+                type: '(event?: BeforeUnloadEvent) => void',
+                description: 'A function triggered when the user attempts to leave the page. You can optionally modify the `event` to show a confirmation dialog.'
+            }
+        ],
+        returns: []
+    },
+    usesearchparam: {
+        name: 'useSearchParam',
+        description: 'Gets and sets a specific URL search parameter in real-time. Automatically updates the state when the URL changes via browser navigation.',
+        category: 'Browser & Device',
+        usage: `import React, {useState} from "react";
+import {useSearchParam} from "@zenuilabs/react-hooks";
+
+const UseSearchParamExample = () => {
+    const {value: searchValue, setValue: setSearchValue} = useSearchParam("query");
+    const [input, setInput] = useState(searchValue || "");
+
+    const handleUpdate = () => {
+        setSearchValue(input || null);
+    };
+
+    return (
+        <div className="flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 rounded-xl space-y-6 w-full max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Search Parameter Tracker
+            </h2>
+
+            <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Type a search query..."
+                className="w-full p-3 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-accent"
+            />
+
+            <button
+                onClick={handleUpdate}
+                className="px-4 py-2 rounded-md bg-accent hover:bg-accent-dark text-white transition-all"
+            >
+                Update Search Param
+            </button>
+
+            <p className="text-gray-700 dark:text-gray-300">
+                Current search parameter: <span className="font-semibold">{searchValue || "None"}</span>
+            </p>
+        </div>
+    );
+};
+
+export default UseSearchParamExample;`,
+        api: [
+            {
+                param: 'key',
+                type: 'string',
+                description: 'The key of the URL search parameter to read and update.'
+            }
+        ],
+        returns: [
+            {
+                name: 'value',
+                type: 'string | null',
+                description: 'The current value of the specified search parameter.'
+            },
+            {
+                name: 'setValue',
+                type: '(newValue: string | null) => void',
+                description: 'Function to update the search parameter. Pass `null` to remove it from the URL.'
+            }
+        ]
+    },
+    usevisibilitychange: {
+        name: 'useVisibilityChange',
+        description: 'Tracks the visibility state of the document. Returns whether the page is currently visible or hidden, updating in real-time.',
+        category: 'Browser & Device',
+        usage: `import React from "react";
+import {useVisibilityChange} from "@zenuilabs/react-hooks";
+
+const UseVisibilityChangeExample = () => {
+    const {visible, hidden} = useVisibilityChange();
+
+    return (
+        <div className="flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 rounded-xl space-y-6 w-full max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Page Visibility Tracker
+            </h2>
+
+            <p className={\`text-lg font-medium \${visible ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}\`}>
+                {visible ? "Page is Visible" : "Page is Hidden"}
+            </p>
+
+            <p className="text-gray-700 dark:text-gray-300">
+                Hidden: <span className="font-semibold">{hidden ? "Yes" : "No"}</span>
+            </p>
+        </div>
+    );
+};
+
+export default UseVisibilityChangeExample;`,
+        api: [],
+        returns: [
+            {
+                name: 'visible',
+                type: 'boolean',
+                description: 'Indicates whether the page is currently visible to the user.'
+            },
+            {
+                name: 'hidden',
+                type: 'boolean',
+                description: 'Indicates whether the page is currently hidden (not visible to the user).'
+            }
+        ]
+    },
+    usevideo: {
+        name: 'useVideo',
+        description: 'Manages video playback with full control over play, pause, stop, volume, mute, and current time. Tracks real-time state such as playing status, duration, current time, volume, and mute status.',
+        category: 'Media',
+        usage: `import React, {useState} from "react";
+import {useVideo} from "@zenuilabs/react-hooks";
+
+const UseVideoExample = () => {
+    const {videoRef, playing, currentTime, duration, volume, muted, controls} = useVideo("https://www.w3schools.com/html/mov_bbb.mp4");
+    const [volumeInput, setVolumeInput] = useState(volume);
+
+    return (
+        <div className="flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 rounded-xl space-y-6 w-full max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Video Player Hook Example
+            </h2>
+
+            <video ref={videoRef} className="w-full rounded-lg bg-black" />
+
+            <div className="flex flex-col space-y-2 w-full">
+                <p className="text-gray-700 dark:text-gray-300">
+                    {playing ? "Playing" : "Paused"} - {currentTime.toFixed(1)}s / {duration.toFixed(1)}s
+                </p>
+
+                <div className="flex space-x-2">
+                    <button onClick={controls.play} className="px-4 py-2 bg-accent hover:bg-accent-dark text-white rounded-md">Play</button>
+                    <button onClick={controls.pause} className="px-4 py-2 bg-accent hover:bg-accent-dark text-white rounded-md">Pause</button>
+                    <button onClick={controls.stop} className="px-4 py-2 bg-accent hover:bg-accent-dark text-white rounded-md">Stop</button>
+                    <button onClick={controls.toggleMute} className="px-4 py-2 bg-accent hover:bg-accent-dark text-white rounded-md">
+                        {muted ? "Unmute" : "Mute"}
+                    </button>
+                </div>
+
+                <div className="flex items-center space-x-2">
+                    <label className="text-gray-700 dark:text-gray-300">Volume:</label>
+                    <input
+                        type="range"
+                        min={0}
+                        max={1}
+                        step={0.01}
+                        value={volumeInput}
+                        onChange={(e) => {
+                            const val = parseFloat(e.target.value);
+                            setVolumeInput(val);
+                            controls.setVolume(val);
+                        }}
+                        className="flex-1"
+                    />
+                </div>
+
+                <div className="flex items-center space-x-2">
+                    <label className="text-gray-700 dark:text-gray-300">Seek:</label>
+                    <input
+                        type="range"
+                        min={0}
+                        max={duration || 0}
+                        step={0.1}
+                        value={currentTime}
+                        onChange={(e) => controls.setTime(parseFloat(e.target.value))}
+                        className="flex-1"
+                    />
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default UseVideoExample;`,
+        api: [
+            {
+                param: 'src',
+                type: 'string',
+                description: 'The video source URL to load into the hook.'
+            }
+        ],
+        returns: [
+            {name: 'playing', type: 'boolean', description: 'Whether the video is currently playing.'},
+            {name: 'currentTime', type: 'number', description: 'Current playback time in seconds.'},
+            {name: 'duration', type: 'number', description: 'Total video duration in seconds.'},
+            {name: 'volume', type: 'number', description: 'Current volume level (0 to 1).'},
+            {name: 'muted', type: 'boolean', description: 'Whether the video is muted.'},
+            {
+                name: 'videoRef',
+                type: 'RefObject<HTMLVideoElement>',
+                description: 'Ref to attach to the HTMLVideoElement.'
+            },
+            {
+                name: 'controls',
+                type: 'VideoControls',
+                description: 'Object containing control functions: play, pause, stop, setVolume, setTime, toggleMute.'
+            }
+        ]
+    },
+    useaudio: {
+        name: 'useAudio',
+        description: 'Manages audio playback with full control over play, pause, stop, volume, and current time. Tracks real-time state such as playing status, duration, current time, and volume.',
+        category: 'Media',
+        usage: `import React, {useState} from "react";
+import {useAudio} from "@zenuilabs/react-hooks";
+
+const UseAudioExample = () => {
+    const {playing, currentTime, duration, volume, controls} = useAudio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
+    const [volumeInput, setVolumeInput] = useState(volume);
+
+    return (
+        <div className="flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 rounded-xl space-y-6 w-full max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Audio Player Hook Example
+            </h2>
+
+            <div className="flex flex-col space-y-2 w-full">
+                <p className="text-gray-700 dark:text-gray-300">
+                    {playing ? "Playing" : "Paused"} - {currentTime.toFixed(1)}s / {duration.toFixed(1)}s
+                </p>
+
+                <div className="flex space-x-2">
+                    <button onClick={controls.play} className="px-4 py-2 bg-accent hover:bg-accent-dark text-white rounded-md">Play</button>
+                    <button onClick={controls.pause} className="px-4 py-2 bg-accent hover:bg-accent-dark text-white rounded-md">Pause</button>
+                    <button onClick={controls.stop} className="px-4 py-2 bg-accent hover:bg-accent-dark text-white rounded-md">Stop</button>
+                </div>
+
+                <div className="flex items-center space-x-2">
+                    <label className="text-gray-700 dark:text-gray-300">Volume:</label>
+                    <input
+                        type="range"
+                        min={0}
+                        max={1}
+                        step={0.01}
+                        value={volumeInput}
+                        onChange={(e) => {
+                            const val = parseFloat(e.target.value);
+                            setVolumeInput(val);
+                            controls.setVolume(val);
+                        }}
+                        className="flex-1"
+                    />
+                </div>
+
+                <div className="flex items-center space-x-2">
+                    <label className="text-gray-700 dark:text-gray-300">Seek:</label>
+                    <input
+                        type="range"
+                        min={0}
+                        max={duration || 0}
+                        step={0.1}
+                        value={currentTime}
+                        onChange={(e) => controls.setTime(parseFloat(e.target.value))}
+                        className="flex-1"
+                    />
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default UseAudioExample;`,
+        api: [
+            {
+                param: 'src',
+                type: 'string',
+                description: 'The audio source URL to load into the hook.'
+            }
+        ],
+        returns: [
+            {name: 'playing', type: 'boolean', description: 'Whether the audio is currently playing.'},
+            {name: 'currentTime', type: 'number', description: 'Current playback time in seconds.'},
+            {name: 'duration', type: 'number', description: 'Total audio duration in seconds.'},
+            {name: 'volume', type: 'number', description: 'Current volume level (0 to 1).'},
+            {
+                name: 'audioRef',
+                type: 'RefObject<HTMLAudioElement>',
+                description: 'Ref to attach to the HTMLAudioElement.'
+            },
+            {
+                name: 'controls',
+                type: 'AudioControls',
+                description: 'Object containing control functions: play, pause, stop, setVolume, setTime.'
+            }
+        ]
+    },
+    usefullscreen: {
+        name: 'useFullscreen',
+        description: 'Manage fullscreen mode for any HTML element. Provides functions to enter, exit, or toggle fullscreen, and tracks the fullscreen state.',
+        category: 'DOM & Events',
+        usage: `import React from "react";
+import {useFullscreen} from "@zenuilabs/react-hooks";
+
+const UseFullscreenExample = () => {
+    const {ref, isFullscreen, controls} = useFullscreen<HTMLDivElement>();
+
+    return (
+        <div className="flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 rounded-xl space-y-6 w-full max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Fullscreen Hook Example
+            </h2>
+
+            <div
+                ref={ref}
+                className="w-full h-48 bg-blue-500 dark:bg-blue-700 rounded-lg flex items-center justify-center text-white text-lg font-semibold"
+            >
+                {isFullscreen ? "Fullscreen Mode" : "Click buttons to enter fullscreen"}
+            </div>
+
+            <div className="flex space-x-2">
+                <button onClick={controls.enter} className="px-4 py-2 bg-accent hover:bg-accent-dark text-white rounded-md">Enter Fullscreen</button>
+                <button onClick={controls.exit} className="px-4 py-2 bg-accent hover:bg-accent-dark text-white rounded-md">Exit Fullscreen</button>
+                <button onClick={controls.toggle} className="px-4 py-2 bg-accent hover:bg-accent-dark text-white rounded-md">Toggle Fullscreen</button>
+            </div>
+        </div>
+    );
+};
+
+export default UseFullscreenExample;`,
+        api: [],
+        returns: [
+            {
+                name: 'ref',
+                type: 'RefObject<T>',
+                description: 'Attach this ref to the HTML element you want to control fullscreen for.'
+            },
+            {
+                name: 'isFullscreen',
+                type: 'boolean',
+                description: 'Indicates whether the element is currently in fullscreen mode.'
+            },
+            {
+                name: 'controls',
+                type: 'FullscreenControls',
+                description: 'Object containing control functions: enter, exit, toggle fullscreen.'
+            }
+        ]
+    }
 };

@@ -6,13 +6,19 @@ import {ExternalLink, ListFilter, Search, X} from "lucide-react";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Badge} from "@/components/ui/badge";
 import {AnimatePresence, motion} from "framer-motion";
-import {hooks} from "@/data/hooks-data";
+import {hooksData} from "@/data";
+import {useLockBodyScroll} from "@zenuilabs/react-hooks";
 
 const HookLists = () => {
     const [search, setSearch] = useState('');
     const [debouncedSearch, setDebouncedSearch] = useState('');
     const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('');
+
+    const hooksArray = Object.entries(hooksData).map(([key, hook]) => ({
+        id: key,
+        ...hook
+    }));
 
     useEffect(() => {
         const handler = setTimeout(() => {
@@ -22,10 +28,12 @@ const HookLists = () => {
         return () => clearTimeout(handler);
     }, [search]);
 
-    const categories = Array.from(new Set(hooks.map(hook => hook.category)));
+    useLockBodyScroll(categoryDropdownOpen);
+
+    const categories = Array.from(new Set(hooksArray.map(hook => hook.category)));
 
     // Updated filtering logic to include both search and category
-    const filteredHooks = hooks.filter(hook => {
+    const filteredHooks = hooksArray.filter(hook => {
         const matchesSearch = hook.name.toLowerCase().includes(debouncedSearch.toLowerCase());
         const matchesCategory = selectedCategory === '' || hook.category === selectedCategory;
         return matchesSearch && matchesCategory;
@@ -104,7 +112,7 @@ const HookLists = () => {
                                         animate={{opacity: 1, y: 0}}
                                         exit={{opacity: 0, y: -10}}
                                         transition={{duration: 0.1}}
-                                        className='absolute ct_dropdown dark:bg-gray-800 dark:shadow-gray-900 min-w-max max-w-3xl top-full right-0 bg-white rounded-xl shadow-xl shadow-gray-200 p-2'>
+                                        className='absolute ct_dropdown dark:bg-gray-800 dark:shadow-gray-900 min-w-max max-w-3xl top-0 right-full bg-white rounded-xl shadow-xl shadow-gray-200 p-2'>
                                         <p
                                             onClick={() => handleCategorySelect('')}
                                             className={`${selectedCategory === '' ? 'bg-gray-100 dark:bg-gray-900' : 'hover:bg-gray-50 dark:hover:bg-gray-900'} cursor-pointer py-2 px-4 dark:text-darkText/80 rounded-lg font-medium`}>

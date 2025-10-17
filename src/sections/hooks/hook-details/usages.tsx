@@ -50,6 +50,7 @@ const Usages = ({hook}: { hook: HookType }) => {
                                 margin: 0,
                                 fontSize: '12px !important',
                                 border: 'none',
+                                maxHeight: '600px',
                                 borderRadius: '0.5rem',
                                 lineHeight: '1.6'
                             }}
@@ -64,7 +65,7 @@ const Usages = ({hook}: { hook: HookType }) => {
                             size="sm"
                             onClick={() => copyToClipboard(hook.usage)}
                             variant="outline"
-                            className="absolute border-gray-200 dark:border-slate-700 rounded-lg gap-1 cursor-pointer dark:text-darkText top-2 right-2"
+                            className="absolute bg-white dark:bg-slate-900 border-gray-200 dark:border-slate-700 rounded-lg gap-1 cursor-pointer dark:text-darkText top-2 right-2"
                         >
                             {
                                 isCopied ? (

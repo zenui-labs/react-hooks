@@ -18,10 +18,10 @@ const Details = ({slug}: { slug: string }) => {
     const {isCopied, copyToClipboard} = useCopyToClipboard()
 
     return (
-        <div className='min-h-screen pt-28 max-w-[1300px] mx-auto z-0 relative'>
+        <div className='min-h-screen pt-20 lg:pt-28 max-w-[1300px] mx-auto z-0 relative'>
             <div className="container mx-auto px-4 py-8">
 
-                <div className='flex justify-between w-full mb-12'>
+                <div className='flex flex-col gap-5 lg:gap-0 lg:flex-row justify-between w-full mb-12'>
                     <div className="">
                         <div className='flex items-center gap-4'>
                             <Link
@@ -30,9 +30,9 @@ const Details = ({slug}: { slug: string }) => {
                                 className='size-10 hover:bg-gray-50 dark:hover:bg-gray-900 dark:border-gray-700 dark:text-darkText cursor-pointer rounded-full border border-gray-200 flex items-center justify-center'>
                                 <ChevronLeft size={24}/>
                             </Link>
-                            <h1 className="text-[2.5rem] font-bold dark:text-darkText">{hook.name}</h1>
+                            <h1 className="text-[1.8rem] lg:text-[2.5rem] font-bold dark:text-darkText">{hook.name}</h1>
                         </div>
-                        <p className="text-lg max-w-2xl dark:text-darkText/80">{hook.description}</p>
+                        <p className="text-base mt-2 lg:mt-0 lg:text-lg max-w-2xl dark:text-darkText/80">{hook.description}</p>
                     </div>
 
                     <div className="flex gap-4">
@@ -43,23 +43,10 @@ const Details = ({slug}: { slug: string }) => {
                             <Play className="w-4 h-4 mr-2"/>
                             Open in StackBlitz
                         </Button>
-                        {/*<Button*/}
-                        {/*    onClick={() => copyToClipboard(`npm install @zenuilabs/react-hooks`)}*/}
-                        {/*    variant="outline"*/}
-                        {/*    className='border-gray-200 dark:border-gray-700 dark:text-darkText dark:hover:bg-gray-900 hover:bg-gray-50 cursor-pointer transition-all duration-200'*/}
-                        {/*>*/}
-                        {/*    {*/}
-                        {/*        isCopied ? (*/}
-                        {/*            <Check className="w-4 h-4 mr-2"/>*/}
-                        {/*        ) : (*/}
-                        {/*            <Copy className="w-4 h-4 mr-2"/>*/}
-                        {/*        )*/}
-                        {/*    }*/}
-                        {/*    Copy Install Command*/}
-                        {/*</Button>*/}
                         <Button variant="outline" asChild
                                 className='border-gray-200 dark:border-gray-700 dark:text-darkText dark:hover:bg-gray-900 hover:bg-gray-50 cursor-pointer transition-all duration-200'>
-                            <a href="https://github.com/zenuilabs/react-hooks" target="_blank"
+                            <a href="https://github.com/zenui-labs/react-hooks/blob/main/src/data/index.ts"
+                               target="_blank"
                                rel="noopener noreferrer">
                                 <ExternalLink className="w-4 h-4 mr-2"/>
                                 View on GitHub

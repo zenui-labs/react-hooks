@@ -15,3 +15,34 @@
 button {
     cursor: pointer;
 }
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 8px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #decdfd;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #3B03A9;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #3B03A9;
+}
+
+/* Dark mode overrides */
+.dark ::-webkit-scrollbar-track {
+    background: #3a2f50;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background-color: #6928e8;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background-color: #6928e8;
+}

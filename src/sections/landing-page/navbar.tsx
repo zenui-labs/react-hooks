@@ -45,7 +45,7 @@ const Navbar = ({hasGradientBg = true}: { hasGradientBg?: boolean }) => {
     }
 
     return (
-        <header className={`${scrolled && 'pt-6'} transition-all duration-300 fixed w-full top-0 z-50`}>
+        <header className={`${scrolled && 'pt-6'} transition-all duration-300 fixed w-full hidden lg:block top-0 z-50`}>
             <div
                 className={`${scrolled ? 'max-w-[1100px] backdrop-blur-3xl py-3' : 'max-w-[1300px] py-5'} transition-all duration-300 rounded-full mx-auto px-6 flex items-center justify-between`}>
                 <Link href={'/'} className='cursor-pointer'>
@@ -58,12 +58,12 @@ const Navbar = ({hasGradientBg = true}: { hasGradientBg?: boolean }) => {
                     </Link>
                     <a
                         className={`${scrolled || !hasGradientBg ? 'dark:text-darkText text-black' : 'text-white'} hover:underline text-base`}
-                        href="#popular-hooks">
+                        href="/#popular-hooks">
                         Popular Hooks
                     </a>
                     <a
                         className={`${scrolled || !hasGradientBg ? 'dark:text-darkText text-black' : 'text-white'} hover:underline text-base`}
-                        href="https://www.npmjs.com/package/@zenuilabs/react-hooks?activeTab=versions" target="_blank"
+                        href="https://github.com/zenui-labs/react-hooks/releases" target="_blank"
                         rel="noopener noreferrer">
                         Changelog
                     </a>
