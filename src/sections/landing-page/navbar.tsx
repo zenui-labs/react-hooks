@@ -71,10 +71,12 @@ const Navbar = ({hasGradientBg = true}: { hasGradientBg?: boolean }) => {
 
                 <div
                     className={`${scrolled || !hasGradientBg ? 'dark:text-darkText text-gray-700' : 'text-white'} flex items-center gap-4`}>
-                    <a>
+                    <a href='https://github.com/zenui-labs/react-hooks' target='_blank' rel='noopener noreferrer'
+                       className='hover:scale-120 transition-all duration-200'>
                         <Github size={21}/>
                     </a>
-                    <button onClick={toggleTheme} className='cursor-pointer'>
+                    <button onClick={toggleTheme}
+                            className='cursor-pointer hover:scale-120 transition-all duration-200'>
                         {currentTheme === 'light' ? <Moon size={21}/> : <Sun size={21}/>}
                     </button>
                 </div>

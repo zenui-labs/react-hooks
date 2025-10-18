@@ -52,9 +52,9 @@ const UseSessionStorageExample = () => {
         <div
             className="rounded-xl p-8 transition-colors bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white">
             <h2 className="text-lg font-semibold mb-2">Session Visit Counter</h2>
-            <p className="dark:text-darkText/70 mb-7">
+            <p className="dark:text-[#f4f4f4]/70 mb-7">
                 You have visited this page <strong
-                className='dark:text-darkText'>{value}</strong> {value === 1 ? "time" : "times"} this session.
+                className='dark:text-[#f4f4f4]'>{value}</strong> {value === 1 ? "time" : "times"} this session.
             </p>
             <button
                 onClick={() => setValue(0)}
@@ -122,7 +122,7 @@ const UseDebounceExample = () => {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Type to search..."
-                className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-brandColor"
+                className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#3B03A9]"
             />
 
             <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -185,7 +185,7 @@ const UseToggleExample = () => {
 
             <button
                 onClick={toggle}
-                className="px-4 py-2 bg-brandColor active:scale-[0.95] transition-transform duration-100 hover:bg-brandColor/80 cursor-pointer text-white rounded-lg text-sm font-medium"
+                className="px-4 py-2 bg-[#3B03A9] active:scale-[0.95] transition-transform duration-100 hover:bg-[#3B03A9]/80 cursor-pointer text-white rounded-lg text-sm font-medium"
             >
                 Toggle
             </button>
@@ -193,7 +193,7 @@ const UseToggleExample = () => {
             <button
                 onClick={setTrue}
                 disabled={value}
-                className="px-4 disabled:cursor-not-allowed disabled:bg-gray-100 ml-3 py-2 border border-gray-200 cursor-pointer hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-800 dark:disabled:bg-gray-800 dark:text-darkText rounded-lg text-sm font-medium"
+                className="px-4 disabled:cursor-not-allowed disabled:bg-gray-100 ml-3 py-2 border border-gray-200 cursor-pointer hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-800 dark:disabled:bg-gray-800 dark:text-[#f4f4f4] rounded-lg text-sm font-medium"
             >
                 Set true
             </button>
@@ -201,7 +201,7 @@ const UseToggleExample = () => {
             <button
                 onClick={setFalse}
                 disabled={!value}
-                className="px-4 ml-3 disabled:cursor-not-allowed disabled:bg-gray-100 py-2 border border-gray-200 cursor-pointer hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-800 dark:disabled:bg-gray-800 dark:text-darkText rounded-lg text-sm font-medium"
+                className="px-4 ml-3 disabled:cursor-not-allowed disabled:bg-gray-100 py-2 border border-gray-200 cursor-pointer hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-800 dark:disabled:bg-gray-800 dark:text-[#f4f4f4] rounded-lg text-sm font-medium"
             >
                 Set false
             </button>
@@ -260,7 +260,7 @@ const UseCounterExample = () => {
                 </button>
                 <button
                     onClick={() => set(10)}
-                    className="px-4 py-2 bg-brandColor cursor-pointer text-white rounded hover:bg-brandColor/80 transition-colors"
+                    className="px-4 py-2 bg-[#3B03A9] cursor-pointer text-white rounded hover:bg-[#3B03A9]/80 transition-colors"
                 >
                     Set to 10
                 </button>
@@ -494,7 +494,7 @@ export default UseFetchExample;`,
     },
     useasync: {
         name: 'useAsync',
-        description: 'Manage the lifecycle of asynchronous operations (loading, success, error) with built-in state management. Ideal for handling promises, API calls, or any async task.',
+        description: 'Manage the lifecycle of asynchronous operations (loading, success, error) with built-in state management.',
         category: 'Data Fetching',
         usage: `import React, { useEffect } from "react";
 import { useAsync } from "@zenuilabs/react-hooks";
@@ -515,7 +515,7 @@ const UseAsyncExample = () => {
 
     return (
         <div className="rounded-xl p-8 bg-gray-50 text-gray-900 dark:bg-gray-900 dark transition-colors">
-            <h2 className="text-2xl font-bold mb-6 dark:text-darkText">Async User Fetcher</h2>
+            <h2 className="text-2xl font-bold mb-6 dark:text-[#f4f4f4]">Async User Fetcher</h2>
 
             {loading && (
                 <div className="mb-4 p-4 bg-blue-500/20 border border-blue-500/50 rounded-lg">
@@ -532,7 +532,7 @@ const UseAsyncExample = () => {
             {data && (
                 <div className="mb-6 p-6 bg-green-500/10 border border-green-500/30 rounded-lg">
                     <h3 className="text-lg font-semibold text-green-400 mb-3">✅ User Data</h3>
-                    <div className="space-y-2 dark:text-darkText/80">
+                    <div className="space-y-2 dark:text-[#f4f4f4]/80">
                         <p><strong>Name:</strong> {data.name}</p>
                         <p><strong>Email:</strong> {data.email}</p>
                         <p><strong>Username:</strong> {data.username}</p>
@@ -607,8 +607,8 @@ const UseHoverExample = () => {
         <div
             ref={ref}
             className={\`rounded-xl p-8 transition-colors
-                \${isHovered ? 'bg-brandColor text-white' : 'bg-gray-50 !text-gray-900'}
-                dark:\${isHovered ? 'bg-brandColor text-white' : 'bg-gray-900 text-white'}
+                \${isHovered ? 'bg-[#3B03A9] text-white' : 'bg-gray-50 !text-gray-900'}
+                dark:\${isHovered ? 'bg-[#3B03A9] text-white' : 'bg-gray-900 text-white'}
             \`}
         >
             <h2 className="text-xl font-semibold mb-4">
@@ -621,7 +621,7 @@ const UseHoverExample = () => {
             </p>
             <button
                 className={\`px-4 py-2 rounded-lg font-medium shadow-sm transition-colors
-                    \${isHovered ? 'bg-white text-brandColor hover:bg-gray-100' : 'bg-brandColor text-white hover:bg-brandColor'}
+                    \${isHovered ? 'bg-white text-[#3B03A9] hover:bg-gray-100' : 'bg-[#3B03A9] text-white hover:bg-[#3B03A9]'}
                 \`}
             >
                 {isHovered ? "Hovered!" : "Hover me"}
@@ -648,7 +648,7 @@ export default UseHoverExample;
     },
     useclickoutside: {
         name: 'useClickOutside',
-        description: 'Detect clicks or touches outside a referenced element and trigger a handler function. Useful for closing dropdowns, modals, or tooltips when clicking outside.',
+        description: 'Detect clicks or touches outside a referenced element and trigger a handler function.',
         category: 'DOM & Events',
         mostUse: true,
         usage: `import React, {useRef, useState} from "react";
@@ -667,7 +667,7 @@ const ClickOutsideDropdown = () => {
                 className="relative w-max text-gray-900 dark:text-white">
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="px-4 py-2 rounded-md bg-brandColor text-white hover:bg-brandColor/90 transition-colors"
+                    className="px-4 py-2 rounded-md bg-[#3B03A9] text-white hover:bg-[#3B03A9]/90 transition-colors"
                 >
                     {isOpen ? "Close Dropdown" : "Open Dropdown"}
                 </button>
@@ -715,7 +715,7 @@ const WindowSizeCard = () => {
     const {width, height} = useWindowSize();
 
     return (
-        <div className="flex justify-center p-16 rounded-xl flex-col dark:text-darkText bg-gray-100 dark:bg-gray-900">
+        <div className="flex justify-center p-16 rounded-xl flex-col dark:text-[#f4f4f4] bg-gray-100 dark:bg-gray-900">
             <p className="mb-2">
                 <strong>Width:</strong> {width}px
             </p>
@@ -747,7 +747,7 @@ const KeyPressCard = () => {
     const isEnterPressed = useKeyPress("Enter");
 
     return (
-        <div className="flex justify-center dark:text-darkText flex-col rounded-xl p-16 bg-gray-100 dark:bg-gray-900">
+        <div className="flex justify-center dark:text-[#f4f4f4] flex-col rounded-xl p-16 bg-gray-100 dark:bg-gray-900">
             <p>
                 Press the <strong>Enter</strong> key to see the state update:
             </p>
@@ -887,7 +887,7 @@ export default UseScrollExample;`,
     },
     usedrop: {
         name: 'useDrop',
-        description: 'Handle drag-and-drop interactions on an element, including detecting when an item is dragged over and dropped. Supports text or custom data transfers.',
+        description: 'Handle drag-and-drop interactions on an element, including detecting when an item is dragged over and dropped.',
         category: 'DOM & Events',
         usage: `import {useDrop} from "@zenuilabs/react-hooks";
 
@@ -915,7 +915,7 @@ export default function UseDropExample() {
     };
 
     return (
-        <div className="flex justify-center dark:text-darkText flex-col rounded-xl p-16 bg-gray-100 dark:bg-gray-900">
+        <div className="flex justify-center dark:text-[#f4f4f4] flex-col rounded-xl p-16 bg-gray-100 dark:bg-gray-900">
             <div className="w-full max-w-2xl space-y-6">
                 {/* Status Display */}
                 <div className="rounded-xl p-6 shadow-lg bg-white dark:bg-gray-800">
@@ -923,7 +923,7 @@ export default function UseDropExample() {
                         <p className="text-gray-700 dark:text-gray-300">
                             Drag State:{' '}
                             <strong
-                                className={isOver ? 'text-brandColor dark:text-purple-400' : 'text-gray-900 dark:text-white'}>
+                                className={isOver ? 'text-[#3B03A9] dark:text-purple-400' : 'text-gray-900 dark:text-white'}>
                                 {isOver ? 'Dragging Over' : 'Idle'}
                             </strong>
                         </p>
@@ -1643,7 +1643,7 @@ export default UseLocationExample;`,
     },
     uselockbodyscroll: {
         name: 'useLockBodyScroll',
-        description: 'Locks or unlocks scrolling on the body element. Useful for modals, sidebars, or other overlay components.',
+        description: 'Locks or unlocks scrolling on the body element.',
         category: 'DOM & Events',
         usage: `import React, {useState} from "react";
 import {useLockBodyScroll} from "@zenuilabs/react-hooks";
@@ -1847,7 +1847,7 @@ export default UseMouseExample;`,
     },
     usemousewheel: {
         name: 'useMouseWheel',
-        description: 'Tracks mouse wheel events and returns the scroll deltas (deltaX, deltaY, deltaZ) in real-time. Can be attached to the window or a specific element.',
+        description: 'Tracks mouse wheel events and returns the scroll deltas (deltaX, deltaY, deltaZ) in real-time.',
         category: 'DOM & Events',
         usage: `import React, {useRef} from "react";
 import {useMouseWheel} from "@zenuilabs/react-hooks";
@@ -1952,7 +1952,7 @@ export default UseNetworkStateExample;`,
     },
     usepageleave: {
         name: 'usePageLeave',
-        description: 'Detects when the user attempts to leave the page (e.g., closing the tab or refreshing) and triggers a callback. Can be used to show a confirmation dialog or save state.',
+        description: 'Detects when the user attempts to leave the page (e.g., closing the tab or refreshing) and triggers a callback.',
         category: 'Browser & Device',
         usage: `import React, {useState} from "react";
 import {usePageLeave} from "@zenuilabs/react-hooks";
@@ -2097,7 +2097,7 @@ export default UseVisibilityChangeExample;`,
     },
     usevideo: {
         name: 'useVideo',
-        description: 'Manages video playback with full control over play, pause, stop, volume, mute, and current time. Tracks real-time state such as playing status, duration, current time, volume, and mute status.',
+        description: 'Manages video playback with full control over play, pause, stop, volume, mute, and current time.',
         category: 'Media',
         usage: `import React, {useState} from "react";
 import {useVideo} from "@zenuilabs/react-hooks";
@@ -2190,7 +2190,7 @@ export default UseVideoExample;`,
     },
     useaudio: {
         name: 'useAudio',
-        description: 'Manages audio playback with full control over play, pause, stop, volume, and current time. Tracks real-time state such as playing status, duration, current time, and volume.',
+        description: 'Manages audio playback with full control over play, pause, stop, volume, and current time.',
         category: 'Media',
         usage: `import React, {useState} from "react";
 import {useAudio} from "@zenuilabs/react-hooks";

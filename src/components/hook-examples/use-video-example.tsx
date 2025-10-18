@@ -31,7 +31,7 @@ const UseVideoExample = () => {
                             className="px-4 py-2 bg-brandColor text-white rounded-md">Pause
                     </button>
                     <button onClick={controls.stop}
-                            className="px-4 py-2 bg-brandColor text-white rounded-md">Stop
+                            className="px-4 py-2 bg-brandColor text-white rounded-md">Reset
                     </button>
                     <button onClick={controls.toggleMute}
                             className="px-4 py-2 bg-brandColor text-white rounded-md">

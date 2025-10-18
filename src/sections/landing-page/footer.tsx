@@ -20,8 +20,8 @@ const Footer = () => {
                 <a
                     href="https://zenui.net"
                     target="_blank"
-                    className="ml-1 text-brandColor underline"
-                >@zenui</a
+                    className="ml-1 text-brandColor dark:text-purple-500 underline"
+                >@zenui-labs</a
                 >
             </p>
         </footer>

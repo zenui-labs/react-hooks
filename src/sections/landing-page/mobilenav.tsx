@@ -54,10 +54,12 @@ const Mobilenav = ({hasGradientBg = true}: { hasGradientBg?: boolean }) => {
                 </Link>
                 <div
                     className={`${scrolled || !hasGradientBg ? 'dark:text-darkText text-gray-700' : 'text-white'} flex items-center gap-4`}>
-                    <a>
+                    <a href='https://github.com/zenui-labs/react-hooks' target='_blank' rel='noopener noreferrer'
+                       className='hover:scale-120 transition-all duration-200'>
                         <Github size={24}/>
                     </a>
-                    <button onClick={toggleTheme} className='cursor-pointer'>
+                    <button onClick={toggleTheme}
+                            className='cursor-pointer hover:scale-120 transition-all duration-200'>
                         {currentTheme === 'light' ? <Moon size={24}/> : <Sun size={24}/>}
                     </button>
                     <button type={'button'} onClick={() => setSidebarOpen(true)}>
@@ -67,7 +69,7 @@ const Mobilenav = ({hasGradientBg = true}: { hasGradientBg?: boolean }) => {
             </div>
 
             <aside
-                className={`${sidebarOpen ? 'translate-x-0' : 'translate-x-[100%]'} transition-all duration-300 flex flex-col bg-white fixed top-0 h-screen right-0 w-[80%] z-50 p-6 gap-8`}>
+                className={`${sidebarOpen ? 'translate-x-0' : 'translate-x-[100%]'} transition-all duration-300 flex flex-col bg-white fixed top-0 h-screen right-0 w-[80%] z-50 p-6 gap-8 shadow-2xl`}>
 
                 <X className='text-gray-700' onClick={() => setSidebarOpen(false)}/>
 

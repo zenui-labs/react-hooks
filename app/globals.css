@@ -4,7 +4,7 @@
 
 @theme {
     --color-brandColor: #3B03A9;
-    --color-darkBg: #00001A;
+    --color-darkBg: #00000c;
     --color-darkText: #f4f4f4;
 }
 
@@ -23,26 +23,26 @@ button {
 }
 
 ::-webkit-scrollbar-track {
-    background: #decdfd;
+    background: #ededed;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #3B03A9;
+    background-color: #c5c5c5;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #3B03A9;
+    background-color: #c5c5c5;
 }
 
 /* Dark mode overrides */
 .dark ::-webkit-scrollbar-track {
-    background: #3a2f50;
+    background: #202020;
 }
 
 .dark ::-webkit-scrollbar-thumb {
-    background-color: #6928e8;
+    background-color: #5c5c5c;
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-    background-color: #6928e8;
+    background-color: #5c5c5c;
 }

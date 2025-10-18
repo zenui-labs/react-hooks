@@ -11,7 +11,7 @@ const Features = () => {
                 Choose Our Hooks?</h2>
             <div className="grid md:grid-cols-3 gap-8 mt-10">
                 <Card
-                    className="border-gray-200 dark:border-gray-800 hover:shadow-lg cursor-pointer transition-all duration-200 rounded-xl">
+                    className="border-gray-200 dark:hover:shadow-slate-950 dark:border-gray-800 hover:shadow-lg cursor-pointer transition-all duration-200 rounded-xl">
                     <CardHeader>
                         <div
                             className="w-12 h-12 dark:bg-purple-900 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
@@ -25,7 +25,7 @@ const Features = () => {
                     </CardHeader>
                 </Card>
                 <Card
-                    className="border-gray-200 dark:border-gray-800 hover:shadow-lg cursor-pointer transition-all duration-200 rounded-xl">
+                    className="border-gray-200 dark:hover:shadow-slate-950 dark:border-gray-800 hover:shadow-lg cursor-pointer transition-all duration-200 rounded-xl">
                     <CardHeader>
                         <div
                             className="w-12 h-12 dark:bg-blue-900 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
@@ -39,7 +39,7 @@ const Features = () => {
                     </CardHeader>
                 </Card>
                 <Card
-                    className="border-gray-200 dark:border-gray-800 hover:shadow-lg cursor-pointer transition-all duration-200 rounded-xl">
+                    className="border-gray-200 dark:hover:shadow-slate-950 dark:border-gray-800 hover:shadow-lg cursor-pointer transition-all duration-200 rounded-xl">
                     <CardHeader>
                         <div
                             className="w-12 h-12 dark:bg-green-900 bg-green-100 rounded-lg flex items-center justify-center mb-4">

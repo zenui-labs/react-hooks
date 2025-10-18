@@ -2,7 +2,7 @@
 
 import React, {useEffect, useState} from 'react';
 import Link from "next/link";
-import {ExternalLink, ListFilter, Search, X} from "lucide-react";
+import {ArrowRight, ListFilter, Search, X} from "lucide-react";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Badge} from "@/components/ui/badge";
 import {AnimatePresence, motion} from "framer-motion";
@@ -177,9 +177,9 @@ const HookLists = () => {
                                         </CardHeader>
                                         <CardContent className='mt-auto'>
                                             <Link href={`/hooks/${hook.name.toLowerCase()}`}
-                                                  className="bg-linear-to-r dark:text-indigo-300 py-2 rounded-xl text-[1rem] font-medium flex items-center gap-3 text-brandColor border border-brandColor/50 hover:bg-brandColor/10 transition-all justify-center duration-200">
+                                                  className="bg-linear-to-r dark:text-indigo-300 py-2 rounded-xl text-[1rem] font-medium flex items-center gap-2 hover:gap-3 text-brandColor border border-brandColor/50 hover:bg-brandColor/10 transition-all justify-center duration-200">
                                                 Try it out
-                                                <ExternalLink size={16}/>
+                                                <ArrowRight size={18}/>
                                             </Link>
                                         </CardContent>
                                     </Card>
@@ -219,9 +219,9 @@ const HookLists = () => {
                                                     </CardHeader>
                                                     <CardContent className='mt-auto'>
                                                         <Link href={`/hooks/${hook.name.toLowerCase()}`}
-                                                              className="bg-linear-to-r dark:text-indigo-300 py-2 rounded-xl text-[1rem] font-medium flex items-center gap-3 text-brandColor border border-brandColor/50 hover:bg-brandColor/10 transition-all justify-center duration-200">
+                                                              className="bg-linear-to-r dark:text-indigo-300 py-2 rounded-xl text-[1rem] font-medium flex items-center gap-2 hover:gap-3 text-brandColor border border-brandColor/50 hover:bg-brandColor/10 transition-all justify-center duration-200">
                                                             Try it out
-                                                            <ExternalLink size={16}/>
+                                                            <ArrowRight size={18}/>
                                                         </Link>
                                                     </CardContent>
                                                 </Card>

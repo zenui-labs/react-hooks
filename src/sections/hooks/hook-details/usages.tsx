@@ -29,10 +29,46 @@ const Usages = ({hook}: { hook: HookType }) => {
         return () => observer.disconnect();
     }, []);
 
+    const {isCopied: installationCopied, copyToClipboard: installationCopyToClipboard} = useCopyToClipboard()
     const {isCopied, copyToClipboard} = useCopyToClipboard()
 
     return (
         <>
+            <Card className='border-none dark:bg-gray-900 dark:text-darkText bg-gray-50'>
+                <CardHeader>
+                    <CardTitle>Installation</CardTitle>
+                </CardHeader>
+                <CardContent className='relative'>
+                    <SyntaxHighlighter
+                        language="bash"
+                        customStyle={{
+                            margin: 0,
+                            fontSize: '14px !important',
+                            border: 'none',
+                            borderRadius: '0.5rem',
+                        }}
+                        style={syntaxTheme}
+                    >
+                        npm install @zenuilabs/react-hooks
+                    </SyntaxHighlighter>
+
+                    <Button
+                        size="sm"
+                        onClick={() => installationCopyToClipboard('npm install @zenuilabs/react-hooks')}
+                        variant="outline"
+                        className="absolute border-gray-200 dark:border-slate-700 rounded-lg gap-1 cursor-pointer dark:text-darkText top-2 right-7"
+                    >
+                        {
+                            installationCopied ? (
+                                <Check size={16}/>
+                            ) : (
+                                <Copy size={16}/>
+                            )
+                        }
+                    </Button>
+                </CardContent>
+            </Card>
+
             <Card className='border-none bg-gray-50 dark:bg-gray-900 dark:text-darkText'>
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
@@ -82,41 +118,6 @@ const Usages = ({hook}: { hook: HookType }) => {
                             }
                         </Button>
                     </div>
-                </CardContent>
-            </Card>
-
-            <Card className='border-none dark:bg-gray-900 dark:text-darkText bg-gray-50'>
-                <CardHeader>
-                    <CardTitle>Installation</CardTitle>
-                </CardHeader>
-                <CardContent className='relative'>
-                    <SyntaxHighlighter
-                        language="bash"
-                        customStyle={{
-                            margin: 0,
-                            fontSize: '14px !important',
-                            border: 'none',
-                            borderRadius: '0.5rem',
-                        }}
-                        style={syntaxTheme}
-                    >
-                        npm install @zenuilabs/react-hooks
-                    </SyntaxHighlighter>
-
-                    <Button
-                        size="sm"
-                        onClick={() => copyToClipboard('npm install @zenuilabs/react-hooks')}
-                        variant="outline"
-                        className="absolute border-gray-200 dark:border-slate-700 rounded-lg gap-1 cursor-pointer dark:text-darkText top-2 right-7"
-                    >
-                        {
-                            isCopied ? (
-                                <Check size={16}/>
-                            ) : (
-                                <Copy size={16}/>
-                            )
-                        }
-                    </Button>
                 </CardContent>
             </Card>
         </>

@@ -19,7 +19,7 @@ const Hero = () => {
             <div
                 className="absolute inset-0 z-[-1] hidden dark:block"
                 style={{
-                    background: "radial-gradient(125% 125% at 50% 90%, #00001A 40%, #6B21A8 100%)",
+                    background: "radial-gradient(125% 125% at 50% 90%, #00000c 40%, #6f27ad 100%)",
                 }}
             />
 
