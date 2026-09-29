@@ -2,11 +2,12 @@
 
 import {useEffect, useMemo, useRef, useState} from 'react';
 import {usePathname, useRouter, useSearchParams} from 'next/navigation';
-import {Search, X} from 'lucide-react';
+import {ChevronDown, Search, X} from 'lucide-react';
 import {useDebounce} from '@zenuilabs/react-hooks';
 import type {HookCategory, HookLevel, HookSummary} from '@/types';
 import {HookCard} from '@/components/site/hook-card';
 import {LEVEL_LABEL} from '@/components/site/level';
+import {ScrollRail} from '@/components/site/scroll-rail';
 import {categorySlug} from '@/lib/slug';
 import {cn} from '@/lib/cn';
 
@@ -24,7 +25,6 @@ export function HookIndex({groups}: { groups: Groups }) {
     const categoryParam = params.get('category');
     const category = groups.find((g) => categorySlug(g.category) === categoryParam)?.category ?? null;
     const level = LEVELS.find((l) => l === params.get('level')) ?? null;
-    const onlyNew = params.get('since') === '2.1.0';
 
     const [query, setQuery] = useState(params.get('q') ?? '');
     const debouncedQuery = useDebounce(query, 150);
@@ -60,14 +60,13 @@ export function HookIndex({groups}: { groups: Groups }) {
     const matches = (hook: HookSummary) =>
         (!category || hook.category === category) &&
         (!level || hook.level === level) &&
-        (!onlyNew || hook.since === '2.1.0') &&
         (!q || hook.name.toLowerCase().includes(q) || hook.description.toLowerCase().includes(q));
 
     const filteredGroups = groups
         .map((group) => ({...group, hooks: group.hooks.filter(matches)}))
         .filter((group) => group.hooks.length > 0);
     const total = filteredGroups.reduce((sum, group) => sum + group.hooks.length, 0);
-    const hasFilters = Boolean(category || level || onlyNew || q);
+    const hasFilters = Boolean(category || level || q);
 
     const clearAll = () => {
         setQuery('');
@@ -103,55 +102,43 @@ export function HookIndex({groups}: { groups: Groups }) {
             </div>
 
             <div className="sticky top-15 z-30 -mx-4 mt-10 border-y border-line bg-paper/90 px-4 py-3 backdrop-blur-md sm:-mx-6 sm:px-6">
-                <div className="flex gap-2 overflow-x-auto pb-0.5 [scrollbar-width:none]">
-                    <Chip active={!category} onClick={() => setParam('category', null)} count={all.length}>All</Chip>
-                    {groups.map((group) => (
-                        <Chip
-                            key={group.category}
-                            active={category === group.category}
-                            onClick={() => setParam('category', category === group.category ? null : categorySlug(group.category))}
-                            count={group.hooks.length}
-                        >
-                            {group.category}
-                        </Chip>
-                    ))}
-                </div>
-                <div className="mt-2.5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
-                    <div className="flex items-center gap-1" role="group" aria-label="Level">
-                        {LEVELS.map((l) => (
-                            <button
-                                key={l}
-                                type="button"
-                                aria-pressed={level === l}
-                                onClick={() => setParam('level', level === l ? null : l)}
+                <div className="flex flex-col gap-3 md:flex-row md:items-center">
+                    <ScrollRail label="Categories" className="flex-1">
+                        <Chip active={!category} onClick={() => setParam('category', null)} count={all.length}>All</Chip>
+                        {groups.map((group) => (
+                            <Chip
+                                key={group.category}
+                                active={category === group.category}
+                                onClick={() => setParam('category', category === group.category ? null : categorySlug(group.category))}
+                                count={group.hooks.length}
+                            >
+                                {group.category}
+                            </Chip>
+                        ))}
+                    </ScrollRail>
+
+                    <div className="flex shrink-0 items-center gap-3">
+                        <label className="relative">
+                            <span className="sr-only">Level</span>
+                            <select
+                                value={level ?? ''}
+                                onChange={(event) => setParam('level', event.target.value || null)}
                                 className={cn(
-                                    'h-8 rounded-md px-2.5 font-mono text-xs transition-colors',
-                                    level === l ? 'bg-accent-soft text-accent' : 'text-ink-3 hover:text-ink'
+                                    'h-9 cursor-pointer appearance-none rounded-full border bg-panel pl-3.5 pr-9 text-sm outline-none transition-colors focus-visible:border-accent',
+                                    level ? 'border-ink text-ink' : 'border-line text-ink-2 hover:border-line-strong hover:text-ink'
                                 )}
                             >
-                                {LEVEL_LABEL[l]}
+                                <option value="">All levels</option>
+                                {LEVELS.map((l) => <option key={l} value={l}>{LEVEL_LABEL[l]}</option>)}
+                            </select>
+                            <ChevronDown size={15} className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-ink-3"/>
+                        </label>
+                        {hasFilters && (
+                            <button type="button" onClick={clearAll} className="inline-flex h-9 items-center gap-1 font-mono text-xs text-ink-2 hover:text-ink">
+                                <X size={13}/> Clear
                             </button>
-                        ))}
-                    </div>
-                    <button
-                        type="button"
-                        aria-pressed={onlyNew}
-                        onClick={() => setParam('since', onlyNew ? null : '2.1.0')}
-                        className={cn(
-                            'h-8 rounded-md px-2.5 font-mono text-xs transition-colors',
-                            onlyNew ? 'bg-signal text-signal-ink' : 'text-ink-3 hover:text-ink'
                         )}
-                    >
-                        New in 2.1
-                    </button>
-                    <span className="ml-auto font-mono text-xs tabular-nums text-ink-3">
-                        {total} of {all.length}
-                    </span>
-                    {hasFilters && (
-                        <button type="button" onClick={clearAll} className="inline-flex items-center gap-1 font-mono text-xs text-ink-2 hover:text-ink">
-                            <X size={13}/> Clear
-                        </button>
-                    )}
+                    </div>
                 </div>
             </div>
 
@@ -166,11 +153,11 @@ export function HookIndex({groups}: { groups: Groups }) {
             ) : (
                 filteredGroups.map((group) => (
                     <section key={group.category} className="mt-14" aria-labelledby={`group-${categorySlug(group.category)}`}>
-                        <h2 id={`group-${categorySlug(group.category)}`} className="flex items-baseline gap-3 border-b border-line pb-3">
+                        <h2 id={`group-${categorySlug(group.category)}`} className="flex items-baseline gap-3">
                             <span className="font-display text-2xl font-medium tracking-tight text-ink">{group.category}</span>
                             <span className="font-mono text-xs tabular-nums text-ink-3">{group.hooks.length}</span>
                         </h2>
-                        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                             {group.hooks.map((hook) => <HookCard key={hook.slug} hook={hook} showCategory={false}/>)}
                         </div>
                     </section>

@@ -8,7 +8,7 @@ import {Logo} from '@/components/site/logo';
 import {ThemeToggle} from '@/components/site/theme-toggle';
 import {SearchTrigger, useCommandMenu} from '@/components/site/command-menu';
 import {GithubIcon} from '@/components/site/icons';
-import {SITE} from '@/lib/site';
+import {SITE, VERSION} from '@/lib/site';
 import {cn} from '@/lib/cn';
 
 const NAV = [
@@ -41,6 +41,14 @@ export function Header() {
         >
             <div className="mx-auto flex h-15 max-w-[1320px] items-center gap-6 px-4 sm:px-6">
                 <Logo/>
+                <a
+                    href={SITE.releases}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="-ml-3 hidden rounded-full border border-line px-2 py-0.5 font-mono text-[11px] text-ink-3 transition-colors hover:border-line-strong hover:text-ink sm:inline-block"
+                >
+                    v{VERSION}
+                </a>
 
                 <nav className="ml-4 hidden items-center gap-1 md:flex" aria-label="Main">
                     {NAV.map((item) => {

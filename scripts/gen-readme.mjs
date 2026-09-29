@@ -11,6 +11,10 @@ const CATEGORIES = [
     'Interaction', 'Browser & Device', 'Media', 'Time & Motion', 'Utilities',
 ];
 
+// Hooks first shipped in the package's current major.minor get a `new` badge.
+const {version} = JSON.parse(readFileSync(join(root, 'packages/react-hooks/package.json'), 'utf8'));
+const release = (v) => v.split('.').slice(0, 2).join('.');
+
 const hooks = [];
 for (const file of files) {
     const mod = await import(join(root, 'src/data', `${file}.ts`));
@@ -24,7 +28,7 @@ for (const category of CATEGORIES) {
     lines.push(`### ${category}`, '', '| Hook | What it does |', '| --- | --- |');
     for (const hook of group) {
         const summary = hook.description.split(/(?<=\.)\s/)[0].replace(/\|/g, '\\|');
-        const isNew = hook.since === '2.1.0' ? ' `new`' : '';
+        const isNew = release(hook.since) === release(version) ? ' `new`' : '';
         lines.push(`| [\`${hook.name}\`](https://react-hooks.zenui.net/hooks/${hook.slug})${isNew} | ${summary} |`);
     }
     lines.push('');

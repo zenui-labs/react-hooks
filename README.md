@@ -52,6 +52,20 @@ npm run dev
    is generated from these file names on `dev` and `build`.
 6. Run `npm run pkg:test`, `npm run type-check` and `npm run gen:readme`, then open a pull request.
 
+## Releasing
+
+The site reads the version from `packages/react-hooks/package.json`. The header, hero and footer
+show it, and every hook whose `since` matches its major.minor is labelled new on the site and in
+both READMEs. Bumping that one field updates all of them.
+
+1. Set `version` in `packages/react-hooks/package.json` and `since` on each new hook in `src/data`.
+2. Run `npm run gen:readme` and commit.
+3. Publish from `packages/react-hooks` with `npm publish --access public`. `prepublishOnly` runs
+   the type-check and the server-render tests first.
+4. Tag the release (`git tag vX.Y.Z && git push origin vX.Y.Z`) and create a GitHub release from
+   the tag. The site's changelog links point there.
+5. Run `npm run build` and deploy `out/`.
+
 ## Hooks
 
 <!-- hooks:start -->

@@ -19,8 +19,8 @@ export function LevelBars({level, showLabel, className}: { level: HookLevel; sho
                 {[1, 2, 3].map((step) => (
                     <span
                         key={step}
-                        className={cn('w-[3px] rounded-full', step <= steps ? 'bg-accent' : 'bg-line-strong')}
-                        style={{height: 4 + step * 3}}
+                        className={cn('meter-bar w-[3px] rounded-full', step <= steps ? 'bg-accent' : 'bg-line-strong')}
+                        style={{height: 4 + step * 3, '--i': step} as React.CSSProperties}
                     />
                 ))}
             </span>
