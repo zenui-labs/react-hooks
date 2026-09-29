@@ -1,17 +1,24 @@
 {
   "name": "@zenuilabs/react-hooks",
-  "version": "2.0.0",
-  "description": "Reusable, TypeScript-ready React hooks to supercharge your UI. Lightweight, fully typed, and built for seamless integration.",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "version": "2.1.0",
+  "description": "Typed, SSR-safe React hooks for state, events, browser APIs, async work and realtime data. Zero dependencies, tree-shakeable.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "./package.json": "./package.json"
   },
+  "sideEffects": false,
   "files": [
     "dist",
     "README.md"
@@ -19,30 +26,43 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "test": "npm run build && node --test test/ssr.test.mjs",
+    "prepublishOnly": "npm run type-check && npm test"
   },
   "keywords": [
     "react",
     "hooks",
-    "typescript",
-    "utilities",
-    "zenui-labs",
     "react-hooks",
-    "reusable-hook"
+    "typescript",
+    "ssr",
+    "nextjs",
+    "utilities",
+    "zenui-labs"
   ],
   "author": "ZenUI Labs",
   "license": "MIT",
   "repository": {
-    "url": "https://github.com/zenui-labs/react-hooks"
+    "type": "git",
+    "url": "git+https://github.com/zenui-labs/react-hooks.git",
+    "directory": "packages/react-hooks"
+  },
+  "bugs": {
+    "url": "https://github.com/zenui-labs/react-hooks/issues"
   },
   "homepage": "https://react-hooks.zenui.net/",
   "peerDependencies": {
     "react": ">=16.8.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.0",
-    "react": "^18.2.0",
-    "tsup": "^8.0.0",
-    "typescript": "^5.0.0"
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3"
+  },
+  "overrides": {
+    "esbuild": "^0.28.1"
   }
 }

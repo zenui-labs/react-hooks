@@ -1,76 +1,70 @@
 import './globals.css';
-import type {Metadata} from 'next';
-import {Inter, Space_Grotesk} from 'next/font/google';
+import type {Metadata, Viewport} from 'next';
+import {Bricolage_Grotesque, Geist, JetBrains_Mono} from 'next/font/google';
+import {themeInitScript} from '@/lib/theme';
+import {SITE} from '@/lib/site';
+import {hookList, summariesByCategory} from '@/data';
+import {CommandMenuProvider} from '@/components/site/command-menu';
+import {Header} from '@/components/site/header';
+import {Footer} from '@/components/site/footer';
 
-const inter = Inter({subsets: ['latin']});
-const spaceGrotesk = Space_Grotesk({subsets: ['vietnamese']});
+const geist = Geist({subsets: ['latin'], variable: '--font-geist', display: 'swap'});
+const bricolage = Bricolage_Grotesque({subsets: ['latin'], variable: '--font-bricolage', display: 'swap', axes: ['wdth', 'opsz']});
+const jetbrains = JetBrains_Mono({subsets: ['latin'], variable: '--font-jetbrains', display: 'swap'});
+
+const description = `${hookList.length} typed React hooks for state, async data, realtime connections, gestures and browser APIs. SSR-safe, tree-shakeable, zero dependencies.`;
 
 export const metadata: Metadata = {
-    title: 'ZenUI Labs React Hooks - Modern React Hooks Library',
-    description:
-        'A collection of reusable React hooks for modern web development. TypeScript support, production-ready, and developer-friendly.',
-    keywords: [
-        'React hooks',
-        'custom react hooks',
-        'react hook library',
-        'zenui hooks',
-        'react state management',
-        'frontend development',
-        'react utils',
-        'useLocalStorage',
-        'useDebounce',
-        'useAsync',
-        'open source react library',
-    ],
-    authors: [{name: 'ZenUI Labs', url: 'https://zenui.net'}],
-    creator: 'ZenUI Labs',
-    publisher: 'ZenUI Labs',
-    metadataBase: new URL('https://react-hooks.zenui.net'),
-    alternates: {
-        canonical: 'https://react-hooks.zenui.net',
+    metadataBase: new URL(SITE.url),
+    title: {
+        default: 'ZenUI React Hooks: typed, SSR-safe hooks for React',
+        template: '%s | ZenUI React Hooks',
     },
+    description,
+    keywords: ['React hooks', 'custom React hooks', 'TypeScript hooks', 'Next.js hooks', 'useLocalStorage', 'useWebSocket', 'useDebounce', 'zenui'],
+    authors: [{name: 'ZenUI Labs', url: SITE.org}],
+    creator: 'ZenUI Labs',
+    alternates: {canonical: '/'},
     openGraph: {
-        title: 'ZenUI Labs React Hooks - Modern React Hooks Library for Developers',
-        description:
-            'Explore ZenUI Labs React Hooks — a developer-focused library of modern, reusable, and TypeScript-ready React hooks for efficient and elegant web development.',
-        url: 'https://react-hooks.zenui.net',
-        siteName: 'ZenUI Labs React Hooks',
-        images: [
-            {
-                url: 'https://i.ibb.co.com/fYkYqSyk/react-hooks-og-image.png',
-                width: 1200,
-                height: 630,
-                alt: 'ZenUI Labs React Hooks - Modern React Hooks Library',
-            },
-        ],
+        title: 'ZenUI React Hooks',
+        description,
+        url: SITE.url,
+        siteName: 'ZenUI React Hooks',
+        images: [{url: 'https://i.ibb.co.com/fYkYqSyk/react-hooks-og-image.png', width: 1200, height: 630, alt: 'ZenUI React Hooks'}],
         locale: 'en_US',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'ZenUI Labs React Hooks - Modern, TypeScript-ready React Hooks',
-        description:
-            'A production-ready collection of reusable React hooks designed for modern web apps. Built by ZenUI Labs.',
+        title: 'ZenUI React Hooks',
+        description,
         creator: '@zenuilabs',
         images: ['https://i.ibb.co.com/fYkYqSyk/react-hooks-og-image.png'],
     },
-    robots: {
-        index: true,
-        follow: true,
-    },
 };
 
-export default function RootLayout({
-                                       children,
-                                   }: {
-    children: React.ReactNode;
-}) {
+export const viewport: Viewport = {
+    themeColor: [
+        {media: '(prefers-color-scheme: light)', color: '#f4f3ee'},
+        {media: '(prefers-color-scheme: dark)', color: '#0a0a0c'},
+    ],
+};
+
+export default function RootLayout({children}: { children: React.ReactNode }) {
     return (
-        <html lang="en">
-        <body className={inter.className}>
-        <div className={`${spaceGrotesk.className} dark:bg-darkBg`}>
-            {children}
-        </div>
+        <html lang="en" className={`${geist.variable} ${bricolage.variable} ${jetbrains.variable} dark`} suppressHydrationWarning>
+        <head>
+            <script dangerouslySetInnerHTML={{__html: themeInitScript}}/>
+        </head>
+        <body className="min-h-dvh">
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-[100] focus:rounded-md focus:bg-ink focus:px-3 focus:py-2 focus:text-paper">
+            Skip to content
+        </a>
+        <CommandMenuProvider groups={summariesByCategory}>
+            <Header/>
+            <main id="main">{children}</main>
+            <Footer/>
+        </CommandMenuProvider>
         </body>
         </html>
     );

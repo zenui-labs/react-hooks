@@ -1,24 +1,16 @@
-'use client'
+import {Hero} from '@/sections/landing/hero';
+import {BeforeAfter} from '@/sections/landing/before-after';
+import {Categories} from '@/sections/landing/categories';
+import {NewInRelease, Popular} from '@/sections/landing/showcase';
 
-import React from 'react';
-import Navbar from "@/sections/landing-page/navbar";
-import Hero from "@/sections/landing-page/hero";
-import Features from "@/sections/landing-page/features";
-import PopularHooks from "@/sections/landing-page/popular-hooks";
-import Footer from "@/sections/landing-page/footer";
-import Mobilenav from "@/sections/landing-page/mobilenav";
-
-const Page = () => {
+export default function Page() {
     return (
         <>
-            <Navbar/>
-            <Mobilenav/>
             <Hero/>
-            <Features/>
-            <PopularHooks/>
-            <Footer/>
+            <Categories/>
+            <BeforeAfter/>
+            <Popular/>
+            <NewInRelease/>
         </>
     );
-};
-
-export default Page;
+}

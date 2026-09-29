@@ -1,30 +1,58 @@
-import React, {useEffect} from "react";
-import {useSessionStorage} from "@zenuilabs/react-hooks";
+'use client'
 
-const UseSessionStorageExample = () => {
-    const {value, setValue} = useSessionStorage<number>("session-visits", 0);
+import {useEffect, useState} from 'react';
+import {useSessionStorage} from '@zenuilabs/react-hooks';
+import {Button, Meter, Note, Readout, ReadoutGrid, Row, Stage, StageHeader} from '@/components/demo';
+
+const KEY = 'zenui-demo-checkout-step';
+const STEPS = ['Cart', 'Shipping', 'Payment', 'Review'];
+
+export default function UseSessionStorageDemo() {
+    const {value: step, setValue: setStep, remove} = useSessionStorage<number>(KEY, 0);
+    const [raw, setRaw] = useState<string | null>(null);
 
     useEffect(() => {
-        setValue(value + 1);
-    }, []);
+        setRaw(window.sessionStorage.getItem(KEY));
+    }, [step]);
 
     return (
-        <div
-            className="rounded-xl p-8 transition-colors bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white">
-            <h2 className="text-lg font-semibold mb-2">Session Visit Counter</h2>
-            <p className="dark:text-darkText/70 mb-7">
-                You have visited this page <strong
-                className='dark:text-darkText'>{value}</strong> {value === 1 ? "time" : "times"} this session.
-            </p>
-            <button
-                onClick={() => setValue(0)}
-                className="px-4 py-2 rounded-md bg-red-500 text-white hover:bg-red-600 transition-colors"
-            >
-                Reset Counter
-            </button>
-            <p className="mt-4 text-sm text-gray-400">Counter resets when the browser tab is closed.</p>
-        </div>
+        <Stage>
+            <StageHeader
+                title="Checkout progress"
+                hint="Move through the steps, then reload the page. The step survives a reload but not closing the tab."
+            />
+            <div className="space-y-5">
+                <ol className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                    {STEPS.map((label, i) => (
+                        <li
+                            key={label}
+                            className={
+                                i === step
+                                    ? 'rounded-lg border border-accent bg-accent-soft px-3 py-2 text-sm text-ink'
+                                    : 'rounded-lg border border-line bg-paper px-3 py-2 text-sm text-ink-3'
+                            }
+                        >
+                            <span className="font-mono text-xs">{String(i + 1).padStart(2, '0')}</span> {label}
+                        </li>
+                    ))}
+                </ol>
+                <Meter value={step + 1} max={STEPS.length} label="Progress"/>
+                <Row>
+                    <Button variant="secondary" disabled={step === 0} onClick={() => setStep(s => Math.max(0, s - 1))}>
+                        Back
+                    </Button>
+                    <Button disabled={step === STEPS.length - 1} onClick={() => setStep(s => Math.min(STEPS.length - 1, s + 1))}>
+                        Next step
+                    </Button>
+                    <Button variant="ghost" onClick={remove}>Start over</Button>
+                </Row>
+                <ReadoutGrid>
+                    <Readout label="value" value={step} tone="accent"/>
+                    <Readout label="Current step" value={STEPS[step]}/>
+                    <Readout label="sessionStorage" value={raw ?? 'null'}/>
+                </ReadoutGrid>
+                <Note>Start over calls remove, which deletes the key and returns to the initial value.</Note>
+            </div>
+        </Stage>
     );
-};
-
-export default UseSessionStorageExample;
+}

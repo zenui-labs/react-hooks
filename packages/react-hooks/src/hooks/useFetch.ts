@@ -1,32 +1,82 @@
-import { useEffect, useState } from 'react';
-import type { FetchState } from '../types';
+import {useCallback, useEffect, useRef, useState} from 'react';
+import type {FetchResult} from '../types';
+import {useLatest} from './useLatest';
 
-export function useFetch<T>(url: string, options?: RequestInit): FetchState<T> {
+/** JSON form of the options, or null when they cannot be serialized. */
+function optionsKey(options: RequestInit | undefined): string | null {
+    if (!options) return '';
+    try {
+        return JSON.stringify(options);
+    } catch {
+        return null;
+    }
+}
+
+/**
+ * Fetch JSON from `url` and track `data`, `loading` and `error`.
+ * Refetches when `url` or the JSON form of `options` changes, aborts stale requests,
+ * and skips the request while `url` is empty.
+ * @example
+ * const {data, loading, error, refetch} = useFetch<User[]>('/api/users');
+ * if (loading) return <p>Loading</p>;
+ */
+export function useFetch<T>(url: string | null | undefined, options?: RequestInit): FetchResult<T> {
     const [data, setData] = useState<T | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(Boolean(url));
     const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setLoading(true);
-                setError(null);
+    const urlRef = useLatest(url);
+    const optionsRef = useLatest(options);
+    const controllerRef = useRef<AbortController | null>(null);
 
-                const response = await fetch(url, options);
+    const run = useCallback(() => {
+        controllerRef.current?.abort();
+        const target = urlRef.current;
+        if (!target) {
+            controllerRef.current = null;
+            setLoading(false);
+            return;
+        }
+
+        const controller = new AbortController();
+        controllerRef.current = controller;
+        const userSignal = optionsRef.current?.signal;
+        if (userSignal) {
+            if (userSignal.aborted) controller.abort();
+            else userSignal.addEventListener('abort', () => controller.abort(), {once: true});
+        }
+
+        setLoading(true);
+        setError(null);
+
+        fetch(target, {...optionsRef.current, signal: controller.signal})
+            .then((response) => {
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error(`Request failed with status ${response.status}`);
                 }
-                const result = await response.json();
+                return response.json() as Promise<T>;
+            })
+            .then((result) => {
+                if (controller.signal.aborted) return;
                 setData(result);
-            } catch (err) {
-                setError(err instanceof Error ? err.message : 'An error occurred');
-            } finally {
                 setLoading(false);
-            }
-        };
+            })
+            .catch((err: unknown) => {
+                if (controller.signal.aborted) return;
+                setError(err instanceof Error ? err.message : 'An error occurred');
+                setLoading(false);
+            });
+    }, [urlRef, optionsRef]);
 
-        fetchData();
-    }, [url, JSON.stringify(options)]);
+    // Compare options by their JSON form so an inline object does not refetch on every render.
+    // Unserializable options fall back to identity.
+    const key = optionsKey(options);
+    const optionsDep = key === null ? options : key;
 
-    return { data, loading, error };
+    useEffect(() => {
+        run();
+        return () => controllerRef.current?.abort();
+    }, [url, optionsDep, run]);
+
+    return {data, loading, error, refetch: run};
 }

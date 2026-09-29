@@ -1,22 +1,21 @@
-import {useEffect, useRef} from 'react';
+import {useEffect} from 'react';
+import {useLatest} from './useLatest';
 
+/**
+ * Call `callback` every `delay` milliseconds. Pass `null` to pause.
+ * The latest callback is always used, so it can read fresh state without resetting the timer.
+ * @example
+ * const [count, setCount] = useState(0);
+ * useInterval(() => setCount(count + 1), running ? 1000 : null);
+ */
 export function useInterval(callback: () => void, delay: number | null) {
-    const savedCallback = useRef<() => void>();
+    const savedCallback = useLatest(callback);
 
     useEffect(() => {
-        savedCallback.current = callback;
-    }, [callback]);
+        if (delay === null || delay === undefined || !Number.isFinite(delay) || delay < 0) return;
 
-    useEffect(() => {
-        function tick() {
-            if (savedCallback.current) {
-                savedCallback.current();
-            }
-        }
+        const id = setInterval(() => savedCallback.current(), delay);
 
-        if (delay !== null) {
-            const id = setInterval(tick, delay);
-            return () => clearInterval(id);
-        }
-    }, [delay]);
+        return () => clearInterval(id);
+    }, [delay, savedCallback]);
 }

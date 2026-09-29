@@ -1,0 +1,23 @@
+// SSR cases for the core-b hook group (original hooks).
+export const cases = {
+    useCopyToClipboard: (lib) => lib.useCopyToClipboard(1500),
+    useInterval: (lib) => lib.useInterval(() => undefined, 1000),
+    useCookie: (lib) => lib.useCookie('theme', 'light'),
+    useGeolocation: (lib) => lib.useGeolocation({enableHighAccuracy: true, timeout: 5000}),
+    useHash: (lib) => lib.useHash(),
+    useIdle: (lib) => lib.useIdle(30000),
+    useIntersection: (lib) => lib.useIntersection({threshold: [0, 0.5, 1], rootMargin: '0px', once: true}),
+    useLocation: (lib) => lib.useLocation(),
+    useLockBodyScroll: (lib) => lib.useLockBodyScroll(true),
+    useMedia: (lib) => lib.useMedia('(min-width: 768px)', false),
+    useMediaDevices: (lib) => lib.useMediaDevices(),
+    useMouse: (lib, React) => lib.useMouse(React.useRef(null)),
+    useMouseWheel: (lib, React) => lib.useMouseWheel(React.useRef(null)),
+    useNetworkState: (lib) => lib.useNetworkState(),
+    usePageLeave: (lib) => lib.usePageLeave(() => undefined),
+    useSearchParam: (lib) => lib.useSearchParam('tab'),
+    useVisibilityChange: (lib) => lib.useVisibilityChange(),
+    useVideo: (lib) => lib.useVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm'),
+    useAudio: (lib) => lib.useAudio('https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3'),
+    useFullscreen: (lib) => lib.useFullscreen(),
+};

@@ -1,3 +1,11 @@
+// Foundation hooks, shared by the rest of the library.
+export {useIsomorphicLayoutEffect} from './hooks/useIsomorphicLayoutEffect';
+export {useLatest} from './hooks/useLatest';
+export {useEventCallback} from './hooks/useEventCallback';
+export {useIsClient} from './hooks/useIsClient';
+export {useIsMounted} from './hooks/useIsMounted';
+
+// Original hook set (1.x and 2.0).
 export {useLocalStorage} from './hooks/useLocalStorage';
 export {useSessionStorage} from './hooks/useSessionStorage';
 export {useDebounce} from './hooks/useDebounce';
@@ -39,3 +47,9 @@ export {useCookie} from './hooks/useCookie';
 export {useEvent} from './hooks/useEvent';
 
 export type * from './types';
+
+// 2.1 hook groups.
+export * from './groups/state-async';
+export * from './groups/realtime-motion';
+export * from './groups/interaction';
+export * from './groups/browser-utils';
